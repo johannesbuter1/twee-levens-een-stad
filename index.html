@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twee levens, één stad · HC Steden en burgers in de Lage Landen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papier:#f6efe0; --papier2:#ece0c6; --inkt:#1f1a14; --zacht:#5b4f40; --lijn:#cdbb95;
+  --nacht:#14213d; --nacht2:#1f3159; --oker:#c8962e; --oker2:#8d6514;
+  --witsen:#a4161a; --witsen-l:#f3d6d3; --jansen:#1d4e89; --jansen-l:#d4e2f3;
+  --goed:#2e6b34; --goed-l:#dcefd9; --fout:#a4161a; --fout-l:#f6dcd9;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--nacht)}
+body{margin:0;font-family:"EB Garamond",Georgia,serif;font-size:19px;line-height:1.5;color:var(--inkt);
+  background:var(--nacht) radial-gradient(ellipse at 50% -10%,#2c4475,var(--nacht) 65%) fixed;min-height:100vh}
+button,input,select,textarea{font-family:"Source Sans 3",system-ui,sans-serif;font-size:16px}
+.ui{font-family:"Source Sans 3",system-ui,sans-serif}
+
+/* Balk */
+header.balk{position:sticky;top:0;z-index:20;background:#0e172b;color:#f1e3bf;border-bottom:3px solid var(--oker);
+  display:flex;align-items:center;gap:10px;padding:7px 14px;flex-wrap:wrap}
+.balk .titel{font-family:"IM Fell English SC",serif;font-size:22px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:140px}
+.balk .chip{font-family:"Source Sans 3",sans-serif;font-size:15px;font-weight:600;padding:3px 11px;border-radius:999px;white-space:nowrap}
+.timer{background:#24365e;color:#f1e3bf}
+.timer.over{background:var(--witsen);color:#fff}
+.punten{background:var(--oker);color:#1b1305}
+.punten.plop{animation:plop .5s}
+@keyframes plop{50%{transform:scale(1.15)}}
+.online{width:11px;height:11px;border-radius:50%;background:#777;display:inline-block}
+.online.ok{background:#4caf50}.online.uit{background:#e0533d}
+.badges{font-size:19px;letter-spacing:2px}
+nav.levels{display:flex;gap:4px;padding:7px 14px;background:#101b33;overflow-x:auto}
+nav.levels span{flex:1;min-width:90px;text-align:center;border:1px solid #33456e;color:#9fb0d3;
+  font-family:"Source Sans 3",sans-serif;font-size:14px;padding:3px 6px;border-radius:4px;white-space:nowrap}
+nav.levels span.actief{background:var(--oker);color:#1b1305;border-color:var(--oker);font-weight:700}
+nav.levels span.klaar{color:#e8d9b0;border-color:#5b6d95}
+nav.levels span.klaar::after{content:" ✓"}
+
+main{max-width:900px;margin:22px auto 70px;padding:0 14px}
+.vel{background:var(--papier);background-image:radial-gradient(ellipse at 15% 0,rgba(255,255,255,.55),transparent 55%),
+  radial-gradient(ellipse at 90% 100%,rgba(140,100,40,.14),transparent 60%);
+  border-radius:6px;padding:34px 42px;box-shadow:0 14px 44px rgba(0,0,0,.45);border:1px solid var(--lijn);position:relative}
+@media (max-width:640px){.vel{padding:24px 16px}body{font-size:18px}}
+h1,h2{font-family:"IM Fell English SC",serif;font-weight:400;color:var(--nacht);line-height:1.1;margin:0 0 6px}
+h1{font-size:44px;text-align:center}
+h2{font-size:32px}
+h3{font-family:"Source Sans 3",sans-serif;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--oker2);margin:22px 0 8px}
+.ondertitel{text-align:center;font-style:italic;color:var(--zacht);margin:0 0 18px}
+.klein{font-size:15px;color:var(--zacht);font-family:"Source Sans 3",sans-serif}
+p{margin:0 0 12px}
+.jaartal{font-family:"IM Fell English SC",serif;font-size:58px;line-height:1;color:var(--oker2)}
+.kop-ev{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.kop-ev h2{margin:0}
+.stapinfo{font-family:"Source Sans 3",sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--zacht);margin-bottom:6px}
+
+.kaart{background:#fffaf0;border:1px solid var(--lijn);border-left:5px solid var(--oker);border-radius:4px;padding:14px 18px;margin:12px 0}
+.opdracht{background:#fff;border:2px solid var(--nacht2);border-radius:6px;padding:14px 18px;margin:16px 0}
+.opdracht > b:first-child{font-family:"Source Sans 3",sans-serif}
+
+.knop{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:6px;padding:10px 18px;font-weight:600;cursor:pointer;
+  background:var(--nacht);color:#fff;font-family:"Source Sans 3",sans-serif;font-size:16px}
+.knop:hover{background:var(--nacht2)}
+.knop:disabled{opacity:.45;cursor:not-allowed}
+.knop.oker{background:var(--oker);color:#1b1305}.knop.oker:hover{background:#dcaa45}
+.knop.licht{background:#fff;color:var(--nacht);border:1px solid var(--nacht2)}
+.knop.w{background:var(--witsen)}.knop.j{background:var(--jansen)}
+.knoppen{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.rechts{justify-content:flex-end}
+.hintknop{background:none;border:1px dashed var(--oker2);color:var(--oker2);border-radius:6px;padding:6px 12px;cursor:pointer;font-weight:600}
+.hint{background:#fff6dc;border:1px dashed var(--oker2);border-radius:6px;padding:10px 14px;margin:10px 0;font-size:17px}
+
+/* Personages */
+.personen{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media (max-width:640px){.personen{grid-template-columns:1fr}}
+.persoon{border-radius:6px;padding:14px 16px;border:2px solid}
+.persoon.w{border-color:var(--witsen);background:var(--witsen-l)}
+.persoon.j{border-color:var(--jansen);background:var(--jansen-l)}
+.persoon h4{margin:0 0 4px;font-family:"IM Fell English SC",serif;font-size:24px;font-weight:400}
+.persoon.w h4{color:var(--witsen)}.persoon.j h4{color:var(--jansen)}
+.persoon p{font-size:17px;margin:0 0 8px}
+.veld{display:block;margin:8px 0}
+.veld span{display:block;font-family:"Source Sans 3",sans-serif;font-size:14px;font-weight:600;margin-bottom:3px}
+.veld input{width:100%;padding:9px 10px;border:1px solid #a99a7c;border-radius:5px;background:#fff}
+.klaskeus{display:flex;gap:8px;flex-wrap:wrap}
+.klaskeus label{border:2px solid var(--nacht2);border-radius:6px;padding:8px 16px;cursor:pointer;font-family:"Source Sans 3",sans-serif;font-weight:600;background:#fff}
+.klaskeus input{display:none}
+.klaskeus label.aan{background:var(--nacht);color:#fff}
+
+/* Score-slider */
+.scoren{border-radius:8px;padding:16px 18px;margin:14px 0;border:2px solid}
+.scoren.w{border-color:var(--witsen);background:var(--witsen-l)}
+.scoren.j{border-color:var(--jansen);background:var(--jansen-l)}
+.scoren .wie{font-family:"Source Sans 3",sans-serif;font-weight:700;font-size:17px;margin-bottom:4px}
+.scoren .wegkijk{font-size:15px;font-family:"Source Sans 3",sans-serif;margin-bottom:10px}
+.sliderrij{display:flex;align-items:center;gap:14px}
+.sliderrij input[type=range]{flex:1;height:34px;accent-color:var(--nacht)}
+.scoren.w input[type=range]{accent-color:var(--witsen)}.scoren.j input[type=range]{accent-color:var(--jansen)}
+.waarde{min-width:96px;text-align:center;font-family:"Source Sans 3",sans-serif;font-weight:700;font-size:30px}
+.waarde small{display:block;font-size:13px;font-weight:600}
+.schaal{display:flex;justify-content:space-between;font-family:"Source Sans 3",sans-serif;font-size:13px;color:var(--zacht);margin-right:110px}
+.slot{font-family:"Source Sans 3",sans-serif;font-weight:600;padding:8px 12px;border-radius:6px;background:#fff;display:inline-block;margin:4px 8px 4px 0}
+
+/* Meerkeuze */
+.opties{display:grid;gap:8px;margin-top:10px}
+.optie{text-align:left;background:#fff;border:2px solid #b9a988;border-radius:6px;padding:10px 14px;cursor:pointer;font-family:"EB Garamond",serif;font-size:18px;color:var(--inkt)}
+.optie:hover:not(:disabled){border-color:var(--nacht2);background:#f3f6fc}
+.optie.goed{border-color:var(--goed);background:var(--goed-l)}
+.optie.fout{border-color:var(--fout);background:var(--fout-l)}
+.optie:disabled{cursor:default}
+.fb{font-family:"Source Sans 3",sans-serif;font-size:15px;margin-top:4px;padding:8px 12px;border-radius:5px}
+.fb.goed{background:var(--goed-l);color:#1d4a22}
+.fb.fout{background:var(--fout-l);color:#6e1013}
+.fb.neutraal{background:#eef1f7;color:#22304f}
+
+/* Onthulling */
+.onthul{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media (max-width:640px){.onthul{grid-template-columns:1fr}}
+.onthul .blok{border-radius:6px;padding:12px 14px;font-size:17px}
+.onthul .blok.w{background:var(--witsen-l);border:2px solid var(--witsen)}
+.onthul .blok.j{background:var(--jansen-l);border:2px solid var(--jansen)}
+.onthul .blok b.kop{font-family:"Source Sans 3",sans-serif;display:block;margin-bottom:6px}
+.balk11{position:relative;height:28px;background:#fff;border:1px solid #b9a988;border-radius:4px;margin:6px 0 10px}
+.balk11 .band{position:absolute;top:0;bottom:0;background:rgba(46,107,52,.22);border-left:2px solid var(--goed);border-right:2px solid var(--goed)}
+.balk11 .stip{position:absolute;top:3px;width:22px;height:22px;margin-left:-11px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #0005}
+.balk11 .nul{position:absolute;top:0;bottom:0;left:50%;border-left:1px dashed #888}
+.verschil{margin-top:12px;background:#fff3cd;border:1px solid var(--oker);border-radius:6px;padding:10px 14px;font-family:"Source Sans 3",sans-serif;font-size:16px}
+
+/* Lijsten: volgorde / ranking */
+.rij{display:flex;align-items:flex-start;gap:10px;background:#fff;border:2px solid #b9a988;border-radius:6px;padding:10px 12px;margin:8px 0}
+.rij[draggable=true]{cursor:grab}
+.rij.sleep{opacity:.4}
+.rij.boven{border-color:var(--oker);box-shadow:0 -3px 0 var(--oker)}
+.rij .nr{font-family:"IM Fell English SC",serif;font-size:30px;color:var(--oker2);min-width:30px;line-height:1}
+.rij .inhoud{flex:1}
+.rij .pijlen{display:flex;flex-direction:column;gap:4px}
+.rij .pijlen button{border:1px solid #9c8b68;background:#f7f1e3;border-radius:4px;width:38px;height:30px;cursor:pointer;font-size:15px}
+.rij.goed{border-color:var(--goed);background:var(--goed-l)}
+.rij.fout{border-color:var(--fout);background:var(--fout-l)}
+.stad b{font-family:"IM Fell English SC",serif;font-size:24px;font-weight:400}
+.tag{font-family:"Source Sans 3",sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;padding:1px 7px;border-radius:3px;margin-left:8px;vertical-align:middle}
+.tag.zuid{background:#f0dcc0;color:#6b3f0b}.tag.noord{background:#d6e4f2;color:#123a66}
+.stad ul{margin:4px 0 0;padding-left:20px;font-size:16.5px}
+.stad li{margin:1px 0}
+
+/* Koppelen */
+.koppel{display:grid;grid-template-columns:minmax(120px,200px) 1fr;gap:16px;align-items:start}
+@media (max-width:640px){.koppel{grid-template-columns:1fr}}
+.tegels{display:flex;flex-direction:column;gap:8px}
+.tegel{background:var(--nacht);color:#fff;border:2px solid var(--nacht);border-radius:6px;padding:8px 12px;cursor:pointer;font-family:"Source Sans 3",sans-serif;font-weight:600;text-align:center;user-select:none}
+.tegel.gekozen{background:var(--oker);color:#1b1305;border-color:var(--oker2)}
+.tegel.gebruikt{opacity:.3}
+.doel{display:flex;gap:10px;align-items:center;background:#fff;border:2px dashed #b9a988;border-radius:6px;padding:8px 10px;margin-bottom:8px;cursor:pointer;min-height:48px}
+.doel .vak{min-width:120px;border-radius:5px;padding:5px 8px;background:#efe7d4;font-family:"Source Sans 3",sans-serif;font-weight:700;text-align:center;color:#8a7a5a}
+.doel .vak.vol{background:var(--nacht);color:#fff}
+.doel.over{border-color:var(--oker);background:#fff8e6}
+.doel.goed{border-style:solid;border-color:var(--goed);background:var(--goed-l)}
+.doel.fout{border-style:solid;border-color:var(--fout);background:var(--fout-l)}
+.doel .tekst{flex:1;font-size:17px}
+
+/* Aanvinken */
+.vink{display:flex;gap:10px;align-items:flex-start;background:#fff;border:2px solid #b9a988;border-radius:6px;padding:9px 12px;margin:7px 0;cursor:pointer}
+.vink input{width:20px;height:20px;margin-top:4px}
+.vink.goed{border-color:var(--goed);background:var(--goed-l)}
+.vink.fout{border-color:var(--fout);background:var(--fout-l)}
+.vink.gemist{border-color:var(--oker);background:#fff3cd}
+
+textarea{width:100%;min-height:120px;padding:10px 12px;border:1px solid #a99a7c;border-radius:6px;font-family:"EB Garamond",serif;font-size:18px;line-height:1.45}
+.model{background:#eef3ea;border-left:5px solid var(--goed);border-radius:4px;padding:12px 16px;margin:12px 0}
+.criterium{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #b9a988;border-radius:6px;padding:8px 12px;margin:6px 0;cursor:pointer;font-size:17px}
+.criterium input{width:20px;height:20px;margin-top:3px}
+
+.jaarknoppen{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.jaarknoppen button{border:2px solid #b9a988;background:#fff;border-radius:5px;padding:5px 9px;cursor:pointer;font-family:"Source Sans 3",sans-serif;font-size:14px}
+.jaarknoppen button.goed{border-color:var(--goed);background:var(--goed-l)}
+.jaarknoppen button.fout{border-color:var(--fout);background:var(--fout-l)}
+.jaarknoppen button:disabled{cursor:default}
+
+select{padding:7px 8px;border:1px solid #a99a7c;border-radius:5px;background:#fff;max-width:100%}
+.karij{display:grid;grid-template-columns:1fr minmax(200px,260px);gap:10px;align-items:center;background:#fff;border:2px solid #b9a988;border-radius:6px;padding:8px 12px;margin:7px 0;font-size:17px}
+@media (max-width:640px){.karij{grid-template-columns:1fr}}
+.karij.goed{border-color:var(--goed);background:var(--goed-l)}
+.karij.fout{border-color:var(--fout);background:var(--fout-l)}
+.karij .kacode{font-family:"Source Sans 3",sans-serif;font-weight:700;color:var(--oker2);margin-right:6px}
+
+.grafiek{width:100%;height:auto;background:#fff;border:1px solid var(--lijn);border-radius:6px;margin:10px 0}
+.legenda{display:flex;gap:18px;font-family:"Source Sans 3",sans-serif;font-size:14px;flex-wrap:wrap}
+.legenda i{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:5px}
+
+.beloning{text-align:center;margin:10px 0 18px}
+.beloning .icoon{font-size:70px;line-height:1.1}
+.beloning .naam{font-family:"IM Fell English SC",serif;font-size:30px;color:var(--oker2)}
+
+table.ranglijst{width:100%;border-collapse:collapse;font-family:"Source Sans 3",sans-serif;font-size:16px;background:#fff}
+.ranglijst th,.ranglijst td{padding:6px 10px;border-bottom:1px solid #e3d6b8;text-align:left}
+.ranglijst th{background:var(--nacht);color:#f1e3bf}
+.ranglijst .r{text-align:right}
+.ranglijst tr.ik td{background:#fff3c4;font-weight:700}
+table.ranglijst.groot{font-size:26px}
+.ranglijst.groot td{padding:10px 14px}
+
+.voet{max-width:900px;margin:-50px auto 30px;padding:0 14px;text-align:right}
+.voet button{background:none;border:0;color:#8ea0c4;cursor:pointer;text-decoration:underline;font-size:14px}
+.melding{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--witsen);color:#fff;padding:12px 20px;border-radius:8px;
+  font-family:"Source Sans 3",sans-serif;font-weight:600;z-index:50;box-shadow:0 6px 20px #0006;max-width:92vw}
+.tabs{display:flex;gap:8px;justify-content:center;margin:10px 0 18px;flex-wrap:wrap}
+
+@media print{
+  html,body{background:#fff}
+  header.balk,nav.levels,.voet,.geen-print,.knoppen{display:none!important}
+  main{margin:0;max-width:none}
+  .vel{box-shadow:none;border:0;padding:0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header class="balk" id="balk" hidden>
+  <div class="titel">Twee levens, één stad</div>
+  <span class="badges" id="badges" title="Verdiende privileges"></span>
+  <span class="online" id="online" title="Ranglijst"></span>
+  <span class="chip timer" id="timer" title="Resterende tijd" hidden></span>
+  <span class="chip punten" id="punten" title="Behaald · tot nu toe te halen · maximum"></span>
+</header>
+<nav class="levels" id="nav" hidden></nav>
+<main><div class="vel" id="vel"></div></main>
+<div class="voet geen-print" id="voet" hidden><button id="opnieuw">Opnieuw beginnen</button></div>
+
+<script>
+/* ===================== INSTELLINGEN ===================== */
+const TIJD_MIN = 45;
+const SB_URL = "https://fvvbmanwbtvbhpuvcjmg.supabase.co";
+const SB_KEY = "sb_publishable_r82GXeWz7ncwlXI1kRR5_A_d5pXpYE3";
+const KLASSEN = ["6V.GS1","6V.GS2","6V.GS3"];
+const klasLabel = k => k.toLowerCase().replace("6v.","6v.");
+const RANGLIJST_UREN = 12;
+const SLEUTEL = "twee-levens-een-stad-v1";
+
+const LEVELS = [
+  {naam:"Opkomst", periode:"1050–1302", icoon:"📜", privilege:"Stadsrecht"},
+  {naam:"Burgerij", periode:"1302–1500", icoon:"🪙", privilege:"Wisselbrief"},
+  {naam:"Opstand", periode:"1500–1588", icoon:"⚓", privilege:"Stapelrecht"},
+  {naam:"Steden", periode:"Ranking the Cities", icoon:"🏛️", privilege:"Zetel in de vroedschap"},
+  {naam:"Gouden Eeuw", periode:"1588–1700", icoon:"🚢", privilege:"VOC-aandeel"},
+  {naam:"Finale", periode:"De stadskroniek", icoon:"📖", privilege:"Stadskroniek"}
+];
+
+/* ===================== INHOUD: GEBEURTENISSEN ===================== */
+/* band: plausibele score volgens de historische positie; buiten de band = 0 punten, met uitleg */
+const EV = [
+{ id:"e1", jaar:"ca. 1180", kort:"Atrecht", titel:"Atrecht, stad van laken",
+  tekst:"Rond Atrecht zorgen een productieve landbouw en grote schaapskuddes voor wol in overvloed. De stad groeit uit tot hét centrum van de lakennijverheid. Handelaren verkopen hun laken op de jaarmarkten in de Champagne, waar ze kooplieden uit de Italiaanse stadstaten ontmoeten. Een kleine groep rijke kooplieden sluit zich aan in een koopliedengilde en leent geld uit aan edellieden. Wevers en vollers werken voor loon in de werkplaatsen.",
+  band:{w:[3,5], j:[-2,2]},
+  uitleg:{w:"De koopliedengilde is precies de groep waarmee Witsen zich verwant voelt: rijk geworden door handel en via leningen aan edellieden ook aan de macht in de stad. Hij juicht dit toe.",
+          j:"Er is werk in de lakennijverheid, maar winst en macht gaan naar een kleine groep. Voor Jansen geen ramp, maar ook geen reden voor groot enthousiasme."},
+  vraag:"Hoe heet de groep die in Atrecht en later in de Vlaamse steden het stadsbestuur in handen kreeg?",
+  opties:[
+    {t:"het patriciaat", goed:true, fb:"Juist: rijke koopmansfamilies die het stadsbestuur beheersten."},
+    {t:"de regenten", fb:"‘Regent’ is de term voor de bestuurders in de 17e-eeuwse Republiek. Welke term hoort bij de middeleeuwse stad?"},
+    {t:"de ambachtsgilden", fb:"De ambachten waren juist (nog) uitgesloten van het bestuur. Denk aan de tegenstelling met het gemeen."},
+    {t:"de leenmannen", fb:"Leenmannen horen bij het feodale stelsel van de adel, niet bij het stadsbestuur van kooplieden."}],
+  hint:"Syllabus §1.1: ‘Rijke kooplieden versterkten hun positie door zich te organiseren in koopliedengilden. Ook door leningen te verstrekken aan edellieden kregen ze het stadsbestuur in handen.’ In Vlaanderen ‘maten zij zich een adellijke levensstijl aan’."
+},
+{ id:"e2", jaar:"1302", kort:"Guldensporenslag", titel:"De Guldensporenslag",
+  tekst:"Op 11 juli 1302 verslaan Vlaamse ambachtslieden en boeren bij Kortrijk een leger van zwaarbewapende Franse ridders. Na afloop worden honderden gouden sporen van gesneuvelde ridders als trofee in een kerk opgehangen. In Gent en Brugge krijgen de ambachten daarna een plaats in het stadsbestuur.",
+  band:{w:[-5,-2], j:[3,5]},
+  uitleg:{w:"Veel patriciërs stonden aan de kant van de Franse koning (de ‘Leliaerts’). Na 1302 moesten ze de macht in de stad delen met de ambachten. Een zwarte dag voor Witsens ‘voorgangers’.",
+          j:"Het gemeen laat zien dat het opgewassen is tegen patriciërs én ridders, en de ambachten krijgen inspraak. Een feestdag voor Jansen."},
+  vraag:"Welke twee conflicten kwamen in 1302 samen?",
+  opties:[
+    {t:"Patriciërs tegen gemeen in de stad, en de Franse koning tegen de graaf van Vlaanderen.", goed:true, fb:"Juist: een sociaal conflict in de steden én een feodaal conflict tussen leenheer en leenman."},
+    {t:"Katholieken tegen protestanten, en de Franse koning tegen de graaf van Vlaanderen.", fb:"Godsdienstconflicten tussen katholieken en protestanten spelen pas na 1517. Wat speelde er binnen de stadsmuren?"},
+    {t:"Patriciërs tegen gemeen in de stad, en de Hanzesteden tegen de Vlaamse lakensteden.", fb:"Het eerste deel klopt. Maar welke vorst stond tegenover de graaf van Vlaanderen?"},
+    {t:"Ambachtslieden tegen boeren op het platteland, en de paus tegen de Franse koning.", fb:"Ambachtslieden en boeren vochten juist samen. Tegen wie vochten ze in de stad?"}],
+  hint:"Syllabus §1.1: ‘Tussen hen [de patriciërs] en het gemeen, aangevoerd door ambachtslieden, ontstonden steeds meer spanningen over bestuur en over werkomstandigheden.’ Denk ook aan de leenheer van de graaf van Vlaanderen."
+},
+{ id:"e3", jaar:"14e eeuw", kort:"Beurs Brugge", titel:"Handel ‘ter Beurse’ in Brugge",
+  tekst:"Brugge is het knooppunt van de handel in Noordwest-Europa. Kooplieden uit Italië, Spanje en de Hanzesteden ontmoeten elkaar op het plein bij de herberg van de familie Van der Beurse. Ze handelen daar niet alleen in goederen, maar vooral in betalingsbeloften op papier. Zo hoeven ze geen kisten vol munten over grote afstanden te vervoeren.",
+  band:{w:[3,5], j:[0,3]},
+  uitleg:{w:"De beurs is een zaak van rijke kooplieden: precies Witsens wereld. Amsterdam kreeg in 1611 een eigen beurs naar dit voorbeeld.",
+          j:"Meer bedrijvigheid betekent werk voor sjouwers, schippers en herbergiers. Maar aan de beurshandel zelf doet Jansen niet mee: licht positief."},
+  vraag:"Welke twee financiële technieken combineerden Brugse handelaren tot de eerste koopmansbeurs?",
+  opties:[
+    {t:"de wisselbrief en de bank", goed:true, fb:"Juist: de wisselbrief (betalingsbelofte) en de bank samen maakten de beurshandel mogelijk."},
+    {t:"het aandeel en de lijfrente", fb:"Aandelen horen vooral bij de VOC (1602). Wat is een ‘betalingsbelofte op papier’?"},
+    {t:"de wisselbrief en het aandeel", fb:"De wisselbrief klopt, maar het aandeel is van later (VOC). Welke instelling bewaarde en leende geld?"},
+    {t:"het stapelrecht en de tolheffing", fb:"Dat zijn stadsrechten, geen financiële technieken. Wat is een betalingsbelofte op papier?"}],
+  hint:"Syllabus §1.2: ‘In Brugge combineerden handelaren de principes van de wisselbrief en de bank tot de eerste koopmansbeurs.’"
+},
+{ id:"e4", jaar:"ca. 1380", kort:"Moderne devotie", titel:"Geert Grote en de moderne devotie",
+  tekst:"Geert Grote, zoon van een rijke koopmansfamilie uit Deventer, ziet af van een lucratieve kerkelijke loopbaan. Hij verkoopt zijn bezit en trekt rond als boeteprediker. Zijn volgelingen leven sober in huizen van broeders en zusters, lezen zelf stichtelijke teksten, ook in de volkstaal, en zorgen voor onderwijs en armen. De beweging verspreidt zich vooral in de steden van de noordelijke gewesten.",
+  band:{w:[-1,4], j:[1,4]},
+  uitleg:{w:"Een gemengd oordeel is verdedigbaar. Een vroom, sober leven en zorg voor de armen passen bij burgerlijk zelfbewustzijn (Witsen hield zelf van vrijheid van geloof). Maar dat een koopmanszoon zijn bezit weggeeft, is voor een patriciër geen voorbeeld.",
+          j:"Voor het gemeen levert de beweging zorg en onderwijs op, en een geloof dat ook gewone stedelingen zelf kunnen beleven."},
+  vraag:"Waarom past de moderne devotie bij de groeiende macht van de stedelijke burgerij?",
+  opties:[
+    {t:"Burgers gaven zelf vorm aan hun geloof, los van de geestelijkheid.", goed:true, fb:"Juist: een individuelere geloofsbeleving. Zo nam de burgerij ook op dit terrein een eigen plek in naast de geestelijkheid."},
+    {t:"Burgers kregen het recht om zelf hun pastoors en bisschoppen te kiezen.", fb:"Over benoemingen in de kerk ging de investituurstrijd tussen paus en keizer. Het ging bij de moderne devotie om de geloofsbeleving zelf."},
+    {t:"Burgers braken met de katholieke kerk en stichtten een eigen kerk.", fb:"Dat is de reformatie (na 1517). De moderne devotie bleef binnen de katholieke kerk."},
+    {t:"Burgers lieten de zorg voor armen voortaan helemaal aan de kloosters over.", fb:"Het omgekeerde: burgers namen zorgtaken juist óver van de geestelijkheid."}],
+  hint:"Syllabus §1.2: ‘Met de vestiging van bedelorden en begijnhoven probeerde de geestelijkheid omgekeerd aansluiting te vinden bij een meer individuele geloofsbeleving van stedelingen, de moderne devotie.’"
+},
+{ id:"e5", jaar:"15e eeuw", kort:"Algemeen belang", titel:"Kooplieden en het algemeen belang",
+  tekst:"In de Vlaamse en Brabantse steden presenteren rijke kooplieden zich als beschermers van het welzijn van de hele stad. Zij betalen mee aan gasthuizen, scholen en schenkingen aan bedelorden. Dat waren taken die eerst bij de geestelijkheid lagen. Wie geen bezit heeft en van dagloon leeft, wordt daarentegen steeds vaker weggezet als lui en onbetrouwbaar.",
+  band:{w:[3,5], j:[-3,1]},
+  uitleg:{w:"De patriciër verschijnt hier als weldoener en drager van het algemeen belang: dat versterkt zijn aanzien en zijn recht om te besturen.",
+          j:"Jansen profiteert misschien van een gasthuis, maar hij is afhankelijk van de gunst van de rijken en wordt als lui weggezet. Eerder negatief."},
+  vraag:"Welk begrip hoort bij het idee dat de stedelijke burgerij opkwam voor het welzijn van álle stedelingen?",
+  opties:[
+    {t:"bonum commune", goed:true, fb:"Juist: het algemeen belang van de stedelingen."},
+    {t:"particularisme", fb:"Particularisme gaat over steden die hun eigen privileges verdedigen tegenover de vorst. Hier gaat het om het welzijn binnen de stad."},
+    {t:"moderne devotie", fb:"De moderne devotie gaat over geloofsbeleving. Hier gaat het om het algemeen belang van de stad."},
+    {t:"oligarchisering", fb:"Oligarchisering is het afsluiten van de macht voor een kleine groep (17e eeuw). Hier presenteert de elite zich juist als dienend aan iedereen."}],
+  hint:"Syllabus §1.2: ‘Behalve van de adel, nam de stedelijke burgerij ook taken van de geestelijkheid over, zoals sociale zorg en onderwijs, en ontwikkelde zij ideeën over het algemeen belang (…) van de stedelingen.’"
+},
+{ id:"e6", jaar:"1464", kort:"Staten-Generaal", titel:"Filips de Goede roept de Staten-Generaal bijeen",
+  tekst:"Hertog Filips de Goede van Bourgondië heeft bijna alle Nederlandse gewesten in handen gekregen. In 1464 roept hij in Brugge voor het eerst afgevaardigden uit al zijn gewesten samen. Hij wil meer eenheid: centrale instellingen voor bestuur en rechtspraak, en belastingen die overal op dezelfde manier worden geheven en flink omhoog gaan.",
+  band:{w:[-4,-1], j:[-4,0]},
+  uitleg:{w:"Patriciërs verdedigden de privileges van hún stad. Centrale rechtspraak en hogere belastingen tasten de zelfstandigheid van de stad aan.",
+          j:"Ook het gemeen betaalt mee aan hogere belastingen. Bij het bestuur was Jansen niet betrokken, dus dat verlies raakt hem minder: negatief, maar minder sterk."},
+  vraag:"Wat was een gevolg van dit Bourgondische beleid in de Vlaamse en Brabantse steden?",
+  opties:[
+    {t:"Steden als Gent en Brugge kwamen in opstand om hun privileges te verdedigen.", goed:true, fb:"Juist: het particularisme van de steden botste met de centralisatie door de hertogen."},
+    {t:"Steden kregen meer inspraak, omdat de hertog hun geld nodig had voor zijn leger.", fb:"Klinkt redelijk, maar de syllabus benadrukt dat de hertogen grip wilden krijgen op bestuur en rechtspraak. Hoe reageerden de steden daarop?"},
+    {t:"De gewesten scheidden zich af van Bourgondië en vormden samen een republiek.", fb:"Dat gebeurt pas in 1588, tegen de Habsburgers. Wat deden de Vlaamse steden in de 15e eeuw?"},
+    {t:"De hertog schafte alle stadsrechten af en verving ze door één landsrecht.", fb:"Zo ver ging het niet: de stadsrechten bleven bestaan. Maar hoe reageerden de steden op de druk?"}],
+  hint:"Syllabus §1.2: ‘Het particularisme van de Brabantse en Vlaamse steden botste met het beleid van de Bourgondische hertogen die in de 15e eeuw grip probeerden te krijgen op bestuur en rechtspraak.’"
+},
+{ id:"e7", jaar:"1540", kort:"Gent onderworpen", titel:"Karel V straft zijn geboortestad",
+  tekst:"Gent weigert mee te betalen aan een belasting (een ‘bede’) voor de oorlogen van keizer Karel V en komt in opstand. Karel trekt zelf met een leger naar de stad. De leiders moeten blootsvoets en met een strop om de nek om genade smeken. Gent verliest het recht om zelf schepenen te kiezen, de ambachten verliezen hun privileges en er komt een dwangburcht. De klok Roeland, symbool van de vrije stad, wordt weggehaald.",
+  band:{w:[-5,-2], j:[-3,1]},
+  uitleg:{w:"Een nachtmerrie voor een regent: de vorst neemt het stadsbestuur over. Juist deze angst verklaart later het verzet tegen de Habsburgers.",
+          j:"Het gemeen verliest inspraak via de ambachten. Maar de hervorming van de ambachten bevorderde volgens de bronnen óók sociale mobiliteit en nieuwe nijverheid. Een licht positief oordeel is dus te verdedigen."},
+  vraag:"Waarom is 1540 voor Gent een keerpunt in de zelfstandigheid van de stad?",
+  opties:[
+    {t:"De vorst nam het stadsbestuur over: centralisatie won van particularisme.", goed:true, fb:"Juist: de stad verloor haar zelfbestuur aan het centrale gezag van de Habsburgers."},
+    {t:"De stad koos voor het calvinisme en brak met de katholieke keizer.", fb:"De opstand van 1540 ging over een belasting en privileges, niet over het geloof. Wie kreeg na 1540 de macht over het stadsbestuur?"},
+    {t:"De stad verloor haar handel, omdat de opstandelingen de Schelde sloten.", fb:"De Schelde werd pas na 1585 gesloten, en dat trof vooral Antwerpen. Wat veranderde er in 1540 aan het bestuur van Gent?"},
+    {t:"De ambachten namen de macht over van de patriciërs, net als in 1302.", fb:"Het omgekeerde: ook de ambachten verloren hun privileges. Wie won hier?"}],
+  hint:"Syllabus §1.2: ‘In de 16e eeuw zetten de Habsburgse vorsten Karel V en Philips II de centralisatiepolitiek door (…).’"
+},
+{ id:"e8", jaar:"1566–1568", kort:"Beeldenstorm & Opstand", titel:"Beeldenstorm, Alva en het begin van de Opstand",
+  tekst:"In 1566 slaan calvinisten in honderden kerken de beelden kapot. Filips II stuurt de hertog van Alva. Die stelt in Brussel de Raad van Beroerten in. De graven Egmont en Horne worden op de Grote Markt onthoofd. In 1568 begint onder leiding van Willem van Oranje de gewapende opstand. Burgers en boeren moeten Spaanse soldaten onderdak en eten geven.",
+  band:{w:[0,4], j:[-4,0]},
+  uitleg:{w:"Patriciërs waren ontevreden over hun verlies van politieke invloed en over de geloofsvervolgingen. De Opstand verdedigt hun privileges, al is oorlog ook riskant voor de handel: positief, maar met een slag om de arm.",
+          j:"Het gemeen betaalt de prijs: inkwartiering, plunderingen en oorlogsellende. Eerder negatief."},
+  vraag:"Welke twee oorzaken van de Opstand noemt de syllabus?",
+  opties:[
+    {t:"De centralisatiepolitiek en de vervolging van protestanten.", goed:true, fb:"Juist: Karel V en Filips II breidden hun centralisatiepolitiek uit naar de godsdienst."},
+    {t:"De centralisatiepolitiek en het mercantilisme van Spanje.", fb:"Centralisatie klopt, maar mercantilisme is 17e-eeuws Frans en Engels beleid. Wat gebeurde er met protestanten?"},
+    {t:"De moord op Willem van Oranje en de vervolging van protestanten.", fb:"Willem van Oranje werd pas in 1584 vermoord, toen de Opstand al lang bezig was."},
+    {t:"De sluiting van de Schelde en de hoge belasting op graan.", fb:"De Schelde ging pas na 1585 dicht, als gevolg van de Opstand. Wat wilden Karel V en Filips II?"}],
+  hint:"Syllabus §1.2: ‘Zij wilden het protestantisme, dat zich concentreerde in de steden, terugdringen. Na de Beeldenstorm en het harde optreden door Alva brak er (…) een opstand uit.’"
+},
+{ id:"e9", jaar:"1585", kort:"Val van Antwerpen", titel:"De val van Antwerpen",
+  tekst:"Na een beleg van meer dan een jaar verovert de Spaanse landvoogd Farnese Antwerpen. Protestanten krijgen vier jaar om te vertrekken. Ongeveer de helft van de bevolking verlaat de stad; veel kooplieden nemen hun kapitaal, kennis en handelscontacten mee naar Holland en Zeeland. De opstandelingen houden de Schelde dicht voor de doorgaande zeevaart naar Antwerpen.",
+  band:{w:[3,5], j:[1,4]},
+  uitleg:{w:"Voor een Amsterdamse regent is dit gunstig: kapitaal, kennis en handelscontacten stromen naar Holland. Het begin van de Gouden Eeuw.",
+          j:"Ook voor een Amsterdamse arbeider betekent dit meer werk in de haven en de nijverheid, al stijgen ook de huren. Positief."},
+  vraag:"Welke functie verloor Antwerpen, zodat Amsterdam die kon overnemen?",
+  opties:[
+    {t:"de stapelmarktfunctie", goed:true, fb:"Juist: Antwerpen verloor vanaf 1585 haar stapelmarktfunctie, Amsterdam werd de nieuwe stapelmarkt van Europa."},
+    {t:"de zetel van de Staten-Generaal", fb:"De Staten-Generaal van de Republiek vergaderden in Den Haag. Het gaat hier om handel."},
+    {t:"het hof van de landvoogd", fb:"Het hof zat in Brussel, niet in Antwerpen. Het gaat hier om handel."},
+    {t:"het Hanzekantoor van de Nederlanden", fb:"Het grote Hanzekantoor zat in Brugge, en Amsterdam was geen Hanzestad. Welke handelsfunctie bedoelen we?"}],
+  hint:"Syllabus §1.2: ‘Door de opstand (…) verloor Antwerpen vanaf 1585 haar stapelmarktfunctie en trokken veel kapitaalkrachtige inwoners naar Holland.’"
+},
+{ id:"e10", jaar:"1602", kort:"VOC", titel:"De oprichting van de VOC",
+  tekst:"De Staten-Generaal geven de Verenigde Oostindische Compagnie het alleenrecht op de handel ten oosten van Kaap de Goede Hoop. Iedereen kan aandelen kopen; bewindhebbers uit rijke koopmansfamilies leiden het bedrijf. De VOC mag forten bouwen, verdragen sluiten en oorlog voeren. Duizenden mannen monsteren aan als matroos of soldaat; veel van hen keren nooit terug.",
+  band:{w:[4,5], j:[-2,2]},
+  uitleg:{w:"Witsen werd later zelf bewindhebber van de VOC. Voor zijn klasse betekent de VOC winst, aanzien en macht.",
+          j:"Het levert werk op, maar zwaar en levensgevaarlijk, en de winst gaat naar de aandeelhouders. Een gemengd oordeel."},
+  vraag:"Waarom was handel als die van de VOC voor de regenten óók een wapen in de oorlog?",
+  opties:[
+    {t:"De winst betaalde de oorlog en verzwakte tegelijk de handel van de vijand.", goed:true, fb:"Juist: de oorlogseconomie. Handel financierde de strijd en ondermijnde de Spaans-Portugese handelspositie."},
+    {t:"De VOC leverde soldaten uit Azië aan het leger van de stadhouder.", fb:"De VOC vocht in Azië, maar leverde geen troepen voor de oorlog in Europa. Waarom was handel zelf een wapen?"},
+    {t:"De winst ging naar de stadhouder, die daarmee een sterk staand leger opbouwde.", fb:"De winst ging naar de aandeelhouders. Hoe hielp handel dan in de oorlog?"},
+    {t:"De VOC hield de Schelde dicht, waardoor Spanje geen graan meer kreeg.", fb:"De Schelde werd door de Republiek gesloten, niet door de VOC. Denk aan geld voor de oorlog en de handel van de vijand."}],
+  hint:"Syllabus §1.3: ‘Handel was nodig om de strijd tegen de Habsburgers te financieren. Regenten zagen die strijd tegelijk als een middel om de Spaanse handelspositie te verzwakken.’"
+},
+{ id:"e11", jaar:"1648", kort:"Vrede van Münster", titel:"De Vrede van Münster",
+  tekst:"Na tachtig jaar oorlog erkent Spanje de Republiek der Zeven Verenigde Nederlanden als onafhankelijke staat. De Schelde blijft gesloten. In Amsterdam wordt de vrede uitbundig gevierd en begint de bouw van een nieuw, reusachtig stadhuis op de Dam: een paleis voor de burgerij.",
+  band:{w:[2,5], j:[1,4]},
+  uitleg:{w:"Erkenning, vrede en een stadhuis als symbool van de macht van de regenten. Witsen is blij, al is vrede ook het einde van de oorlogseconomie.",
+          j:"Vrede betekent minder belastingen en geen oorlogsdreiging. Ook Jansen is blij."},
+  vraag:"De syllabus noemt 1648 ook het begin van een probleem voor de Republiek. Welk?",
+  opties:[
+    {t:"Engeland en Frankrijk gingen een mercantilistisch beleid voeren.", goed:true, fb:"Juist: na 1648 stabiliseerden de buurlanden zich en beschermden ze met mercantilisme hun eigen handel."},
+    {t:"De stadhouder kreeg absolute macht over de zeven gewesten.", fb:"In de Republiek moest de stadhouder de vrijheden van steden en gewesten juist respecteren."},
+    {t:"Antwerpen kreeg zijn rol als stapelmarkt van Europa terug.", fb:"De Schelde bleef dicht, dus Antwerpen kon niet terugkomen. Het probleem kwam van de grote buurlanden."},
+    {t:"De VOC verloor haar alleenrecht op de handel met Azië.", fb:"Het VOC-monopolie bleef. Het probleem kwam van het beleid van de grote buurlanden."}],
+  hint:"Syllabus §1.3: ‘In de periode na 1648 stabiliseerde de situatie in de omliggende landen zich. Engeland en het absolutistische Frankrijk voerden een (…) beleid waar de handel van de confederale Republiek onder leed.’"
+},
+{ id:"e12", jaar:"1650–1670", kort:"Regenten trekken zich terug", titel:"Concurrentie en regenten als renteniers",
+  tekst:"Engeland bepaalt in 1651 dat goederen alleen nog op Engelse schepen, of op schepen uit het land van herkomst, Engeland in mogen. Frankrijk legt hoge invoerheffingen op. Veel Amsterdamse regentenfamilies trekken zich terug uit de handel, lenen hun geld uit aan buitenlandse vorsten en ondernemers en verdelen de stadsambten onderling.",
+  band:{w:[-1,3], j:[-4,-1]},
+  uitleg:{w:"Slecht voor de handel, maar als rentenier en ambtsdrager zit een regent goed: zijn familie houdt geld en macht. Neutraal tot licht positief.",
+          j:"Minder handel betekent minder werk. De ambten zijn voor een gesloten kring en het gemeen profiteert steeds minder: negatief."},
+  vraag:"Welk begrip past bij regenten die hun macht veiligstellen door de ambten onderling te verdelen?",
+  opties:[
+    {t:"oligarchisering", goed:true, fb:"Juist: de macht kwam in handen van een steeds kleinere, gesloten groep."},
+    {t:"particularisme", fb:"Particularisme gaat over de zelfstandigheid van steden en gewesten tegenover het centrale gezag, niet over een gesloten elite binnen de stad."},
+    {t:"centralisatie", fb:"Centralisatie is macht naar een centraal gezag (vorst). Hier gaat het om een kleine groep binnen de stad."},
+    {t:"mercantilisme", fb:"Mercantilisme is het beschermende handelsbeleid van Engeland en Frankrijk. Wat deden de regenten zelf met de ambten?"}],
+  hint:"Syllabus §1.3: ‘Veel regenten trokken zich terug uit de handel (…), leenden hun geld uit aan buitenlandse ondernemers en machthebbers en probeerden hun politieke en economische macht veilig te stellen.’"
+},
+{ id:"e13", jaar:"1672", kort:"Rampjaar", titel:"Het Rampjaar",
+  tekst:"Frankrijk, Engeland, Münster en Keulen vallen de Republiek tegelijk aan. Utrecht geeft zich zonder slag of stoot over aan Lodewijk XIV. ‘Het volk redeloos, de regering radeloos, het land reddeloos.’ In Den Haag vermoordt een woedende menigte raadpensionaris Johan de Witt en zijn broer Cornelis. Willem III wordt stadhouder en laat in veel steden regenten afzetten.",
+  band:{w:[-5,-1], j:[-3,2]},
+  uitleg:{w:"Een ramp voor het land en voor de regentenklasse: invasie, moord en regenten die worden afgezet. (Witsen zelf hoorde later bij de vertrouwelingen van Willem III. Regenten waren dus niet allemaal staatsgezind.)",
+          j:"Oorlog is ook voor het gemeen ellende. Maar in de val van De Witt zag het gemeen een afrekening met de regenten en de komst van een sterke Oranje. Een gemengd oordeel is verdedigbaar."},
+  vraag:"Waarom keerde het gemeen zich in 1672 tegen Johan de Witt?",
+  opties:[
+    {t:"Het gemeen was Oranjegezind en gaf de staatsgezinde regenten de schuld.", goed:true, fb:"Juist: het gemeen had minder geprofiteerd van de Gouden Eeuw en zocht steun bij Oranje tegen de regenten."},
+    {t:"Het gemeen was staatsgezind en verweet De Witt dat hij Oranje steunde.", fb:"Andersom: De Witt was staatsgezind, en dus tegen de Oranjes."},
+    {t:"De Witt had in 1651 de Akte van Navigatie getekend, waardoor werk verdween.", fb:"De Akte van Navigatie was Engels beleid. Welke politieke kant koos het gemeen?"},
+    {t:"De Witt wilde een absolute monarchie naar Frans voorbeeld invoeren.", fb:"De Witt was juist een republikeinse regent. Welke kant koos het gemeen?"}],
+  hint:"Syllabus §1.3: ‘Dit riep onvrede op bij het gemeen (…). Dat stelde zich steeds Oranjegezinder op, terwijl regenten als Johan de Witt juist staatsgezind en tegen de Oranjes waren.’"
+}
+];
+const EVI = Object.fromEntries(EV.map((e,i)=>[e.id,i]));
+const AS = {e1:["1180","Atrecht"],e2:["1302","Gulden-","sporen"],e3:["14e eeuw","Beurs"],e4:["1380","Moderne","devotie"],e5:["15e eeuw","Bonum","commune"],e6:["1464","Staten-","Generaal"],
+  e7:["1540","Gent"],e8:["1568","Opstand"],e9:["1585","Val","Antwerpen"],e10:["1602","VOC"],e11:["1648","Münster"],e12:["1650–70","Regenten"],e13:["1672","Rampjaar"]};
+
+/* ===================== INHOUD: GEHEUGENPOORTEN ===================== */
+const GP1 = { titel:"Geheugenpoort: Europa na het jaar 1000",
+  vraag:"Vanaf de 11e eeuw veranderde Europa. Vink de vier veranderingen aan die de syllabus noemt, zónder terug te kijken in je aantekeningen.",
+  opties:[
+    {t:"De landbouw veranderde en ging meer opbrengen.", goed:true},
+    {t:"De bevolking groeide en trok deels naar nieuwe en groeiende steden.", goed:true},
+    {t:"De handel bloeide op.", goed:true},
+    {t:"Er ontstond weer een monetaire economie van grotere omvang.", goed:true},
+    {t:"Het hofstelsel breidde zich uit.", goed:false, fb:"Het hofstelsel hoort bij de vroege middeleeuwen; het verdween juist langzaam."},
+    {t:"Vorsten namen de handel over van de kooplieden.", goed:false, fb:"Juist kooplieden en steden werden sterker, niet de vorsten."}]};
+
+const GP2 = { titel:"Geheugenpoort: wie is wie in de stad?",
+  vraag:"Koppel elk begrip aan de juiste omschrijving. Klik een begrip en daarna een omschrijving (of sleep).",
+  paren:[
+    {l:"stadsrechten", r:"Voorrechten zoals eigen bestuur, rechtspraak, tol- en belastingrecht"},
+    {l:"poorter", r:"Inwoner met burgerrecht in de stad"},
+    {l:"patriciër", r:"Lid van een rijke koopmansfamilie die het stadsbestuur beheerst"},
+    {l:"gemeen", r:"Ambachtslieden en loonarbeiders zonder bestuursmacht"}]};
+
+const GP3 = { titel:"Geheugenpoort: in de goede volgorde",
+  vraag:"Zet deze gebeurtenissen in chronologische volgorde (oudste bovenaan). Sleep of gebruik de pijltjes.",
+  items:["De Guldensporenslag","De eerste koopmansbeurs in Brugge","De Staten-Generaal komen voor het eerst bijeen","Luther begint zijn kritiek op de kerk"]};
+
+const GP4 = { titel:"Geheugenpoort: jaartallen van de Opstand",
+  vraag:"Koppel elk jaartal aan de juiste gebeurtenis.",
+  paren:[
+    {l:"1566", r:"Beeldenstorm"},
+    {l:"1568", r:"Begin van de Opstand onder Willem van Oranje"},
+    {l:"1585", r:"Antwerpen valt; veel kooplieden vertrekken naar Holland"},
+    {l:"1588", r:"De noordelijke gewesten stichten de Republiek"}]};
+
+/* ===================== INHOUD: RANKING THE CITIES ===================== */
+const STEDEN = [
+ { periode:"tot ca. 1500", titel:"Ranking the Cities · tot ca. 1500",
+   steden:[
+    {s:"Gent", r:"zuid", band:[1,2], feiten:["Rond 1100 eigen schepenbank: de stad wordt een ‘oppidum’, juridisch zelfstandig.","Na 1302 zitten ambachten en poorters samen in twee schepenbanken.","Kiest in 1338 zelf de kant van Engeland, tegen de graaf in.","Na opstanden beknotten de Vrede van Gavere (1453) en Cadzand (1492) haar macht."],
+     fb:"Gent hoort hier bovenaan: eigen rechtspraak, ambachten in het bestuur en zelfs een eigen buitenlandse politiek. De vredes van 1453 en 1492 komen pas aan het eind van de periode."},
+    {s:"Brugge", r:"zuid", band:[1,3], feiten:["Zet rond 1280 de graaf onder druk door buitenlandse kooplieden te weren.","Krijgt in 1323 het stapelrecht op goederen van de Hanze.","Centrum van een Europees handelsnetwerk met de eerste koopmansbeurs.","Komt in 1488 in opstand tegen Maximiliaan en wordt zwaar gestraft."],
+     fb:"Brugge was machtig genoeg om de graaf onder druk te zetten en stadsrechten af te dwingen. Het hoort in de top drie."},
+    {s:"Brussel", r:"zuid", band:[2,4], feiten:["1229: stadskeure van de hertog van Brabant.","1306: opstand van de ambachten mislukt, patriciërs houden de macht.","1356: Blijde Inkomst beschermt burgers tegen willekeur van de vorst.","Vanaf 1430 residentie van het Bourgondische hof."],
+     fb:"Brussel had rechten en de Blijde Inkomst, maar de hertog bleef dichtbij en vanaf 1430 zat het Bourgondische hof in de stad. Een middenpositie."},
+    {s:"Utrecht", r:"noord", band:[2,4], feiten:["1122: stadsrechten van de keizer, al in 1196 een eigen Raad.","1304: de gilden grijpen de macht in het stadsbestuur.","Verscheurd door partijen die Holland of Gelre steunen.","Grootste en rijkste stad van de noordelijke Nederlanden."],
+     fb:"Utrecht had vroeg stadsrechten en gilden in het bestuur, maar de bisschop bleef landsheer en partijstrijd maakte de stad kwetsbaar. Een middenpositie."},
+    {s:"Antwerpen", r:"zuid", band:[4,5], feiten:["Groeit in de 15e eeuw van ca. 18.000 naar 40.000 inwoners.","Concurrent van Brugge dankzij de jaarmarkten voor Engels laken.","Blijft trouw aan Maximiliaan en krijgt de handel van Brugge.","Over eigen bestuursrechten zeggen de bronnen weinig."],
+     fb:"Let op: Antwerpen groeit vooral economisch, en dankzij trouw aan de vorst. Rijkdom is iets anders dan zelfstandigheid; de bronnen tonen nauwelijks eigen bestuursmacht."}
+   ]},
+ { periode:"vanaf ca. 1500", titel:"Ranking the Cities · vanaf ca. 1500",
+   steden:[
+    {s:"Amsterdam", r:"noord", band:[1,1], feiten:["1578: kiest de kant van de Opstand; protestantse kooplieden nemen het bestuur over.","De vroedschap vult zichzelf aan: regentenfamilies kiezen elkaar.","Eigen Wisselbank (1609) en beurs (1611): stapelmarkt van Europa.","1650: de aanval van stadhouder Willem II op de stad loopt vast."],
+     fb:"Amsterdam is hier de duidelijke nummer één: regenten besturen zelf, de stad weerstaat zelfs de stadhouder, en particularisme is in de Republiek de norm."},
+    {s:"Utrecht", r:"noord", band:[2,3], feiten:["1528: de bisschop draagt de wereldlijke macht over aan Karel V; dwangburcht Vredenburg.","In de Republiek eigen Staten van Utrecht.","1618: prins Maurits zet het stadsbestuur af (‘verzet de wet’).","1674: stadhouder Willem III benoemt voortaan alle ambtsdragers."],
+     fb:"Utrecht is binnen de Republiek zelfstandiger dan onder Karel V, maar de stadhouder grijpt er twee keer hard in. Een tweede of derde plaats."},
+    {s:"Antwerpen", r:"zuid", band:[2,4], feiten:["Rond 1560 ca. 100.000 inwoners: handelsmetropool van Europa.","1576: Spaanse Furie, ongeveer 8000 burgers vermoord.","1577–1585: ‘Antwerpse Republiek’ onder calvinistisch bestuur.","1585: veroverd door Farnese; Schelde dicht, helft van de bevolking vertrekt."],
+     fb:"Antwerpen was even zeer zelfstandig (1577–1585), maar verloor dat na de val in 1585 volledig. Een middenpositie."},
+    {s:"Brussel", r:"zuid", band:[3,5], feiten:["Het Bourgondisch-Habsburgse hof laat de vorstelijke macht groeien ten koste van de stad.","Karel V bestuurt vanuit het Koudenbergpaleis zijn wereldrijk.","1567–1568: Raad van Beroerten; Egmont en Horne onthoofd op de Grote Markt."],
+     fb:"In Brussel zat het centrale gezag zelf. De bron zegt letterlijk dat de vorstelijke macht groeide ‘ten nadele van de stedelijke autonomie’. Laag dus."},
+    {s:"Gent", r:"zuid", band:[4,5], feiten:["1540: opstand tegen een belasting neergeslagen door Karel V.","Schepenen worden voortaan door de vorst benoemd; ambachten verliezen privileges.","Spanjaardenkasteel: Gent wordt garnizoensstad.","Na een kort calvinistisch bewind (1577–1584) weer onder Spanje."],
+     fb:"Gent is van koploper naar hekkensluiter gezakt: na 1540 garnizoensstad zonder eigen schepenkeuze. Daarmee zie je de verschuiving het scherpst."}
+   ]}
+];
+
+/* ===================== INHOUD: SCHRIJFOPDRACHTEN ===================== */
+const SCHRIJF = {
+ s1:{ titel:"Stelling: van zuid naar noord?",
+  vraag:"Beargumenteer of weerleg in maximaal drie zinnen: <i>‘Tussen de 14e en de 17e eeuw verschoof de stedelijke zelfstandigheid van de zuidelijke naar de noordelijke Nederlanden.’</i> Gebruik minstens één zuidelijke en één noordelijke stad uit je rankings.",
+  model:"Eens, met een nuance. Tot ca. 1500 waren vooral zuidelijke steden als Gent en Brugge zeer zelfstandig: eigen schepenbank, ambachten in het bestuur, stapelrecht en zelfs een eigen buitenlandse politiek. Door de centralisatie van de Bourgondiërs en Habsburgers verloren ze die zelfstandigheid (Gent 1540, Brussel als hofstad, Antwerpen na 1585). In de Republiek behielden noordelijke steden als Amsterdam juist hun zelfbestuur door regenten en het particularisme, al greep de stadhouder in een stad als Utrecht soms hard in (1618, 1674).",
+  criteria:["Je laat zien dat zuidelijke steden (bv. Gent, Brugge) tot ca. 1500 het meest zelfstandig waren, met een concreet voorbeeld.",
+            "Je legt uit dat de centralisatie door Bourgondiërs/Habsburgers in het zuiden de zelfstandigheid inperkte, met een concreet voorbeeld (bv. Gent 1540, Antwerpen 1585).",
+            "Je laat zien dat noordelijke steden (bv. Amsterdam) in de Republiek zelfstandig bleven door regenten/particularisme."]},
+ s2:{ titel:"Particularisme: vloek of zegen?",
+  vraag:"Leg uit hoe het particularisme van de steden in de 15e en 16e eeuw een bron van conflict met de vorsten was, en in de 17e eeuw juist een voorwaarde voor de bloei van de Republiek.",
+  model:"In de 15e en 16e eeuw wilden de Bourgondische hertogen en daarna de Habsburgers (Karel V, Filips II) het bestuur, de rechtspraak en de belastingen centraliseren. Steden als Gent en Brugge verdedigden hun privileges, wat leidde tot opstanden en uiteindelijk tot de Nederlandse Opstand. In de Republiek ontbrak zo'n centrale vorst: steden en gewesten bleven zelfstandig en werden bestuurd door regenten, die zelf kooplieden waren. Zij voerden beleid in het belang van de handel (oorlogseconomie, gewetensvrijheid die migranten en kapitaal aantrok), en dat zagen de regenten als voorwaarde voor welvaart.",
+  criteria:["Conflict: vorsten (Bourgondiërs/Habsburgers) wilden centraliseren (bestuur, rechtspraak, belasting), steden verdedigden hun privileges → opstand.",
+            "Republiek: steden en gewesten bleven zelfstandig, bestuurd door regenten; de stadhouder moest die vrijheden respecteren.",
+            "Verband met bloei: kooplieden-bestuurders voerden beleid in het belang van de handel (bv. oorlogseconomie, gewetensvrijheid, geen vorst die handel belastte)."]},
+ s3:{ titel:"Witsen en Jansen in 1672",
+  vraag:"Leg uit waarom het gemeen zich na 1650 steeds Oranjegezinder opstelde. Gebruik in je antwoord de begrippen <b>mercantilisme</b> en <b>oligarchisering</b>.",
+  model:"Na 1648 voerden Engeland en Frankrijk een mercantilistisch beleid (bv. de Akte van Navigatie, hoge invoerheffingen), waardoor de handel van de Republiek leed en er voor het gemeen minder werk was. Tegelijk trokken veel regenten zich terug uit de handel, leenden hun geld uit en verdeelden de ambten onderling (oligarchisering): het gemeen, dat al minder van de Gouden Eeuw had geprofiteerd, voelde zich buitengesloten. Het gemeen zocht daarom steun bij de Oranjes als tegenwicht tegen de staatsgezinde regenten zoals Johan de Witt; in het Rampjaar 1672 kwam die woede tot uitbarsting.",
+  criteria:["Mercantilisme: Engeland/Frankrijk beschermden hun eigen handel, waardoor de handel van de Republiek en het werk voor het gemeen afnam.",
+            "Oligarchisering: regenten sloten zich af, verdeelden de ambten onderling en trokken zich terug uit de handel; het gemeen profiteerde minder.",
+            "Oranjegezind: het gemeen zag in een sterke stadhouder (Oranje) een tegenwicht tegen de staatsgezinde regenten (De Witt); dit kwam tot uitbarsting in 1672."]}
+};
+
+/* ===================== INHOUD: FINALE ===================== */
+const GRAFIEKVRAGEN = [
+ {id:"a", vraag:"Bij welke gebeurtenis was de patriciër/regent tevreden, maar het gemeen ontevreden?", goed:["e5","e8","e12"],
+  uitleg:"Bijvoorbeeld de 15e eeuw (bonum commune: de elite als weldoener, het gemeen als ‘lui’ weggezet), 1566–1568 (Opstand verdedigt privileges, gemeen draagt de lasten) of 1650–1670 (regenten als renteniers, minder werk)."},
+ {id:"b", vraag:"Bij welke gebeurtenis was het gemeen tevreden, maar de patriciër/regent ontevreden?", goed:["e2","e13"],
+  uitleg:"Vooral 1302: het gemeen versloeg patriciërs en ridders. Ook 1672 is verdedigbaar: het Oranjegezinde gemeen zag de val van De Witt als afrekening met de regenten."},
+ {id:"c", vraag:"Bij welke gebeurtenis waren zij allebei tevreden?", goed:["e3","e9","e11"],
+  uitleg:"Bijvoorbeeld de beurs in Brugge (meer bedrijvigheid), 1585 (kapitaal en werk naar Holland) of 1648 (vrede en erkenning)."}
+];
+const KA = [
+ {code:"4a", t:"De opkomst van handel en ambacht die de basis legde voor het herleven van een agrarisch-urbane samenleving", goed:["e1","e3"]},
+ {code:"4b", t:"De opkomst van de stedelijke burgerij en de toenemende zelfstandigheid van steden", goed:["e1","e2","e5"]},
+ {code:"4e", t:"Het begin van staatsvorming en centralisatie", goed:["e6","e7"]},
+ {code:"5d", t:"De protestantse reformatie die de splitsing van de christelijke kerk in West-Europa tot gevolg had", goed:["e8"]},
+ {code:"5e", t:"Het conflict in de Nederlanden dat resulteerde in de stichting van een Nederlandse staat", goed:["e8","e9","e11"]},
+ {code:"6c", t:"Wereldwijde handelscontacten, handelskapitalisme en het begin van een wereldeconomie", goed:["e10"]},
+ {code:"6b", t:"De bijzondere plaats in staatkundig opzicht en de bloei in economisch en cultureel opzicht van de Nederlandse Republiek", goed:["e9","e11","e13"]},
+ {code:"6a", t:"Het streven van vorsten naar absolute macht", goed:["e12","e13"]}
+];
+
+/* ===================== STAPPEN ===================== */
+const STAPPEN = [
+ {id:"gp1", lv:0, type:"check", data:GP1, max:4},
+ {id:"e1", lv:0, type:"event", max:7}, {id:"e2", lv:0, type:"event", max:7},
+ {id:"end0", lv:0, type:"end", max:0},
+ {id:"gp2", lv:1, type:"match", data:GP2, max:4},
+ {id:"e3", lv:1, type:"event", max:7}, {id:"e4", lv:1, type:"event", max:7}, {id:"e5", lv:1, type:"event", max:7}, {id:"e6", lv:1, type:"event", max:7},
+ {id:"end1", lv:1, type:"end", max:0},
+ {id:"gp3", lv:2, type:"order", data:GP3, max:4},
+ {id:"e7", lv:2, type:"event", max:7}, {id:"e8", lv:2, type:"event", max:7}, {id:"e9", lv:2, type:"event", max:7},
+ {id:"end2", lv:2, type:"end", max:0},
+ {id:"r1", lv:3, type:"rank", data:STEDEN[0], max:5}, {id:"r2", lv:3, type:"rank", data:STEDEN[1], max:5},
+ {id:"s1", lv:3, type:"write", data:SCHRIJF.s1, max:6},
+ {id:"end3", lv:3, type:"end", max:0},
+ {id:"gp4", lv:4, type:"match", data:GP4, max:4},
+ {id:"e10", lv:4, type:"event", max:7}, {id:"e11", lv:4, type:"event", max:7}, {id:"e12", lv:4, type:"event", max:7}, {id:"e13", lv:4, type:"event", max:7},
+ {id:"end4", lv:4, type:"end", max:0},
+ {id:"f1", lv:5, type:"graph", max:6},
+ {id:"f2", lv:5, type:"ka", max:8},
+ {id:"s2", lv:5, type:"write", data:SCHRIJF.s2, max:6},
+ {id:"s3", lv:5, type:"write", data:SCHRIJF.s3, max:6},
+ {id:"eind", lv:5, type:"overzicht", max:0}
+];
+const MAX_TOTAAL = STAPPEN.reduce((s,x)=>s+x.max,0);
+
+/* ===================== STAAT ===================== */
+const nieuweStaat = () => ({naamW:"", naamJ:"", klas:"", id:null, secret:null, start:null, eind:null, stap:-1, res:{}, timerMelding:false});
+let S = laad() || nieuweStaat();
+function laad(){ try{ return JSON.parse(localStorage.getItem(SLEUTEL)); }catch(e){ return null; } }
+function bewaar(){ try{ localStorage.setItem(SLEUTEL, JSON.stringify(S)); }catch(e){} }
+const R = id => (S.res[id] ||= {});
+
+function score(){
+  let n=0;
+  for(const id in S.res){ const r=S.res[id]; if(r.klaar) n+=r.punten||0; if(r.hint) n-=1; }
+  return Math.max(0,n);
+}
+function teHalen(){ return STAPPEN.filter(s=>S.res[s.id]?.klaar).reduce((t,s)=>t+s.max,0); }
+function levelKlaar(lv){ return STAPPEN.filter(s=>s.lv===lv).every(s=>s.type==="overzicht"||S.res[s.id]?.klaar); }
+function voortgang(){ let n=0; for(let i=0;i<LEVELS.length;i++) if(levelKlaar(i)) n=i+1; else break; return n; }
+function namen(){ return `${S.naamW} & ${S.naamJ}`; }
+
+/* ===================== HULPFUNCTIES ===================== */
+function el(tag, attrs={}, ...kids){
+  const e=document.createElement(tag);
+  for(const [k,v] of Object.entries(attrs||{})){
+    if(v==null||v===false) continue;
+    if(k==="html") e.innerHTML=v;
+    else if(k.startsWith("on")) e.addEventListener(k.slice(2),v);
+    else if(k==="class") e.className=v;
+    else e.setAttribute(k, v===true?"":v);
+  }
+  for(const k of kids.flat()){ if(k==null||k===false) continue; e.append(k.nodeType?k:document.createTextNode(k)); }
+  return e;
+}
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function rng(seed){ let h=2166136261; for(const c of seed) h=Math.imul(h^c.charCodeAt(0),16777619); return ()=>{ h+=0x6D2B79F5; let t=h; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; }; }
+function hussel(arr, seed){ const a=[...arr], r=rng(seed+(S.start||"")); for(let i=a.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const gezicht = v => v<=-4?"😠":v<=-2?"🙁":v<0?"😕":v===0?"😐":v<=2?"🙂":v<=4?"😊":"😄";
+const teken = v => v>0?"+"+v:String(v);
+const inBand = (v,b) => v>=b[0] && v<=b[1];
+function melding(t, ms=5000){ const m=el("div",{class:"melding"},t); document.body.append(m); setTimeout(()=>m.remove(),ms); }
+
+/* ===================== RANGLIJST (Supabase) ===================== */
+async function sb(pad, opties={}){
+  const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),8000);
+  try{
+    const res=await fetch(SB_URL+"/rest/v1/"+pad,{...opties,signal:ctrl.signal,
+      headers:{apikey:SB_KEY,"Content-Type":"application/json",...(opties.headers||{})}});
+    if(!res.ok) throw new Error(res.status+" "+(await res.text()));
+    const txt=await res.text(); return txt?JSON.parse(txt):null;
+  } finally { clearTimeout(t); }
+}
+let syncBezig=false, syncNogmaals=false;
+async function sync(){
+  if(!S.naamW||!S.klas) return;
+  if(syncBezig){ syncNogmaals=true; return; }
+  syncBezig=true;
+  try{
+    if(!S.id){
+      const rij=await sb("rpc/levenslijn_start",{method:"POST",body:JSON.stringify({p_namen:namen(),p_klas:S.klas})});
+      const r=Array.isArray(rij)?rij[0]:rij; S.id=r.id; S.secret=r.secret; bewaar();
+    }
+    await sb("rpc/levenslijn_update",{method:"POST",body:JSON.stringify({p_id:S.id,p_secret:S.secret,
+      p_score:score(),p_level:voortgang(),p_klaar:voortgang()>=LEVELS.length})});
+    zetOnline(true);
+  }catch(e){ console.warn("Ranglijst niet bereikbaar",e); zetOnline(false); }
+  finally{ syncBezig=false; if(syncNogmaals){ syncNogmaals=false; sync(); } }
+}
+function zetOnline(ok){
+  const o=document.getElementById("online"); if(!o) return;
+  o.className="online "+(ok?"ok":"uit");
+  o.title=ok?"Verbonden met de ranglijst":"Ranglijst even niet bereikbaar. Je score wordt later bijgewerkt.";
+}
+async function haalRanglijst(klas){
+  const [rs] = await Promise.all([sb(`levenslijn_resets?select=reset_at&klas=eq.${encodeURIComponent(klas)}`)]);
+  const reset = rs&&rs[0] ? new Date(rs[0].reset_at).getTime() : 0;
+  const sinds = new Date(Math.max(reset, Date.now()-RANGLIJST_UREN*3600e3)).toISOString();
+  return sb(`levenslijn_scores?select=id,namen,score,level,klaar&klas=eq.${encodeURIComponent(klas)}&created_at=gte.${encodeURIComponent(sinds)}&order=score.desc,updated_at.asc&limit=200`);
+}
+let pollTimer=null;
+function startPoll(klas, doel, opties={}){
+  stopPoll();
+  const tick=async()=>{
+    if(!doel.isConnected) return stopPoll();
+    try{ doel.innerHTML=ranglijstHTML(await haalRanglijst(klas),opties); }
+    catch(e){ doel.innerHTML='<p class="klein">De ranglijst is even niet bereikbaar…</p>'; }
+  };
+  tick(); pollTimer=setInterval(tick,opties.interval||8000);
+}
+function stopPoll(){ if(pollTimer) clearInterval(pollTimer); pollTimer=null; }
+function ranglijstHTML(rijen,{groot=false}={}){
+  if(!rijen||!rijen.length) return '<p class="klein">Nog niemand op de ranglijst.</p>';
+  const medaille=p=>p===1?"🥇":p===2?"🥈":p===3?"🥉":p;
+  const vg=r=>r.klaar?"✓ klaar":(LEVELS[Math.min(r.level,LEVELS.length-1)].naam);
+  return `<table class="ranglijst ${groot?"groot":""}"><thead><tr><th>#</th><th>Tweetal</th><th>Bezig met</th><th class="r">Punten</th></tr></thead><tbody>${
+    rijen.map((r,i)=>`<tr class="${r.id===S.id?"ik":""}"><td>${medaille(i+1)}</td><td>${esc(r.namen)}</td><td>${vg(r)}</td><td class="r"><b>${r.score}</b></td></tr>`).join("")
+  }</tbody></table>`;
+}
+
+/* ===================== TIMER & BALK ===================== */
+function fmt(sec){ const a=Math.abs(sec); return (sec<0?"−":"")+Math.floor(a/60)+":"+String(a%60).padStart(2,"0"); }
+function resterend(){ return Math.round(TIJD_MIN*60-((S.eind||Date.now())-S.start)/1000); }
+function tikTimer(){
+  const t=document.getElementById("timer");
+  if(!S.start){ t.hidden=true; return; }
+  const r=resterend(); t.hidden=false; t.textContent="⏳ "+fmt(r);
+  t.classList.toggle("over", r<0);
+  if(r<0 && !S.timerMelding && !S.eind){ S.timerMelding=true; bewaar(); melding("⏰ De 45 minuten zijn om. Rond af wat je doet en ga door naar de finale.",8000); }
+}
+setInterval(tikTimer,1000);
+let vorigeScore=null;
+function updateBalk(){
+  const zichtbaar = S.stap>=0;
+  document.getElementById("balk").hidden=!zichtbaar;
+  document.getElementById("nav").hidden=!zichtbaar;
+  document.getElementById("voet").hidden=!zichtbaar;
+  if(!zichtbaar) return;
+  const p=document.getElementById("punten"), sc=score();
+  p.textContent=`${sc} van ${teHalen()} punten · max. ${MAX_TOTAAL}`;
+  if(vorigeScore!==null && sc>vorigeScore){ p.classList.remove("plop"); void p.offsetWidth; p.classList.add("plop"); }
+  vorigeScore=sc;
+  document.getElementById("badges").textContent=LEVELS.filter((_,i)=>levelKlaar(i)).map(l=>l.icoon).join("");
+  const huidig=STAPPEN[Math.min(S.stap,STAPPEN.length-1)].lv;
+  document.getElementById("nav").innerHTML=LEVELS.map((l,i)=>`<span class="${i===huidig?"actief":levelKlaar(i)?"klaar":""}">${i+1}. ${l.naam}</span>`).join("");
+  tikTimer();
+}
+
+/* ===================== NAVIGATIE ===================== */
+const vel=document.getElementById("vel");
+const put=(...k)=>vel.append(...k.flat().filter(x=>x!=null&&x!==false));
+function volgende(){ S.stap++; bewaar(); toon(); window.scrollTo({top:0,behavior:"smooth"}); }
+function klaar(id, punten){ const r=R(id); r.klaar=true; r.punten=punten; bewaar(); updateBalk(); sync(); }
+function volgendeKnop(tekst="Verder"){ return el("div",{class:"knoppen rechts"}, el("button",{class:"knop oker",onclick:volgende}, tekst+" →")); }
+function stapinfo(stap){
+  const lv=LEVELS[stap.lv];
+  const inLevel=STAPPEN.filter(s=>s.lv===stap.lv && s.type!=="end" && s.type!=="overzicht");
+  const nr=inLevel.indexOf(stap)+1;
+  return el("div",{class:"stapinfo"}, `Level ${stap.lv+1} · ${lv.naam} · ${lv.periode}${nr>0?` · opdracht ${nr} van ${inLevel.length}`:""}`);
+}
+function hintBlok(id, tekst){
+  const r=R(id), wrap=el("div");
+  const teken=()=>{ wrap.innerHTML="";
+    if(r.hint) wrap.append(el("div",{class:"hint",html:"💡 "+esc(tekst)}));
+    else if(!r.klaar) wrap.append(el("button",{class:"hintknop",onclick:()=>{ r.hint=true; bewaar(); updateBalk(); teken(); }},"💡 Hint uit de syllabus (kost 1 punt)"));
+  };
+  teken(); return wrap;
+}
+
+function toon(){
+  stopPoll();
+  vel.innerHTML="";
+  if(S.stap<0) return toonStart();
+  const stap=STAPPEN[Math.min(S.stap,STAPPEN.length-1)];
+  updateBalk();
+  const f={check:toonCheck, match:toonMatch, order:toonOrder, event:toonEvent, end:toonEnd, rank:toonRank, write:toonWrite, graph:toonGraph, ka:toonKA, overzicht:toonOverzicht}[stap.type];
+  f(stap);
+}
+
+/* ===================== START ===================== */
+function toonStart(){
+  updateBalk();
+  put(
+    el("h1",{},"Twee levens, één stad"),
+    el("p",{class:"ondertitel"},"Herhaling HC Steden en burgers in de Lage Landen, 1050–1700"),
+    el("p",{html:"Amsterdam, rond 1690. Twee mannen kijken samen terug op zes eeuwen stadsgeschiedenis. De een bestuurt de stad, de ander sjouwt in de haven. Jullie kruipen in hun huid: bij elke gebeurtenis geeft ieder <b>in het geheim</b> aan hoe zijn personage erop reageert (van −5 tot +5). Daarna onthullen jullie je scores en verklaren jullie ze met de stof van het examen."}),
+    el("div",{class:"personen"},
+      el("div",{class:"persoon w"}, el("h4",{},"Nicolaas Witsen"),
+        el("p",{},"1641–1717 · regent. Uit een rijke koopmansfamilie, burgemeester van Amsterdam en later bewindhebber van de VOC. Voelt zich verwant aan de patriciërs van alle eeuwen."),
+        el("label",{class:"veld"}, el("span",{},"Wie speelt Witsen?"), el("input",{id:"naamW",placeholder:"Alleen je voornaam",maxlength:"18",autocomplete:"off",value:S.naamW}))),
+      el("div",{class:"persoon j"}, el("h4",{},"Cornelis Jansen"),
+        el("p",{},"Verzonnen personage · dagarbeider. Sjouwer in de Amsterdamse haven, woont in een krappe kamer in de Jordaan. Voelt zich verwant aan het gemeen: ambachtslieden en loonarbeiders van alle eeuwen."),
+        el("label",{class:"veld"}, el("span",{},"Wie speelt Jansen?"), el("input",{id:"naamJ",placeholder:"Alleen je voornaam",maxlength:"18",autocomplete:"off",value:S.naamJ})))),
+    el("h3",{},"Jullie klas"),
+    el("div",{class:"klaskeus",id:"klaskeus"}, KLASSEN.map(k=>el("label",{class:S.klas===k?"aan":""}, el("input",{type:"radio",name:"klas",value:k,checked:S.klas===k}), klasLabel(k)))),
+    el("h3",{},"Zo werkt het"),
+    el("ul",{class:"ui",style:"font-size:16px;margin:0 0 10px;padding-left:20px"},
+      el("li",{},"Zes levels, van de opkomst van de steden tot het Rampjaar. Elk level begint met een ‘geheugenpoort’: eerst ophalen, dan pas verder."),
+      el("li",{},`Je hebt ${TIJD_MIN} minuten. De timer loopt door na 0.`),
+      el("li",{},"Hints kosten 1 punt. Bij meerkeuze levert de eerste keer goed de meeste punten op."),
+      el("li",{},"Jullie punten verschijnen live op de ranglijst van jullie klas.")),
+    el("p",{class:"klein",id:"startfout",style:"color:var(--fout)"}),
+    el("div",{class:"knoppen"}, el("button",{class:"knop oker",id:"startknop",onclick:start},"Begin de kroniek →"),
+      el("a",{href:"?bord",class:"klein",style:"margin-left:auto"},"🏆 Ranglijst (docent)"))
+  );
+  vel.querySelectorAll("#klaskeus input").forEach(i=>i.addEventListener("change",()=>{
+    vel.querySelectorAll("#klaskeus label").forEach(l=>l.classList.toggle("aan", l.querySelector("input").checked)); }));
+}
+function start(){
+  const w=document.getElementById("naamW").value.trim(), j=document.getElementById("naamJ").value.trim();
+  const k=(vel.querySelector("#klaskeus input:checked")||{}).value;
+  const fout=document.getElementById("startfout");
+  if(!w||!j){ fout.textContent="Vul allebei je voornaam in."; return; }
+  if(/\s/.test(w)||/\s/.test(j)){ fout.textContent="Alleen je voornaam graag, zonder achternaam."; return; }
+  if(!k){ fout.textContent="Kies jullie klas."; return; }
+  S.naamW=w; S.naamJ=j; S.klas=k; S.start=Date.now(); S.stap=0; bewaar();
+  sync(); toon();
+}
+
+/* ===================== GEHEUGENPOORT: AANVINKEN ===================== */
+function toonCheck(stap){
+  const d=stap.data, r=R(stap.id);
+  r.vinkjes ||= {};
+  const opties=hussel(d.opties.map((o,i)=>({...o,i})), stap.id);
+  put(stapinfo(stap), el("h2",{},d.titel), el("div",{class:"opdracht"}, el("p",{},d.vraag),
+    el("div",{}, opties.map(o=>{
+      const lab=el("label",{class:"vink"}, el("input",{type:"checkbox",checked:!!r.vinkjes[o.i],disabled:r.klaar,onchange:e=>{ r.vinkjes[o.i]=e.target.checked; bewaar(); }}), el("span",{},o.t));
+      if(r.klaar){ const v=!!r.vinkjes[o.i];
+        lab.classList.add(v&&o.goed?"goed":v&&!o.goed?"fout":!v&&o.goed?"gemist":"x");
+        if(v&&!o.goed&&o.fb) lab.append(el("div",{class:"fb fout",style:"margin-left:auto"},o.fb));
+        if(!v&&o.goed) lab.append(el("div",{class:"fb neutraal",style:"margin-left:auto"},"Deze hoorde erbij."));
+      }
+      return lab;
+    })),
+    r.klaar ? el("div",{class:"fb "+(r.punten===4?"goed":"neutraal")},`${r.punten} van de 4 punten. Groen = goed aangevinkt, geel = gemist, rood = hoorde er niet bij.`)
+            : el("div",{class:"knoppen"}, el("button",{class:"knop",onclick:()=>{
+                let p=0; d.opties.forEach((o,i)=>{ if(r.vinkjes[i]) p+=o.goed?1:-1; });
+                klaar(stap.id, Math.max(0,Math.min(4,p))); toon(); }},"Controleer"))),
+    r.klaar?volgendeKnop():null);
+}
+
+/* ===================== GEHEUGENPOORT: KOPPELEN ===================== */
+function toonMatch(stap){
+  const d=stap.data, r=R(stap.id);
+  r.koppel ||= {};               // targetIndex -> tegelIndex
+  let gekozen=null;
+  const tegelVolgorde=hussel(d.paren.map((_,i)=>i), stap.id+"t");
+  const doelVolgorde=hussel(d.paren.map((_,i)=>i), stap.id+"d");
+  const box=el("div");
+  const plaats=(doelI,tegelI)=>{ for(const k in r.koppel) if(r.koppel[k]===tegelI) delete r.koppel[k]; r.koppel[doelI]=tegelI; gekozen=null; bewaar(); teken(); };
+  function teken(){
+    box.innerHTML="";
+    const gebruikt=new Set(Object.values(r.koppel));
+    const tegels=el("div",{class:"tegels"}, tegelVolgorde.map(i=>{
+      const t=el("div",{class:"tegel"+(gekozen===i?" gekozen":"")+(gebruikt.has(i)?" gebruikt":""),draggable:r.klaar?"false":"true",
+        onclick:()=>{ if(r.klaar) return; gekozen = gekozen===i?null:i; teken(); }}, d.paren[i].l);
+      t.addEventListener("dragstart",e=>{ e.dataTransfer.setData("text/plain",String(i)); });
+      return t;
+    }));
+    const doelen=el("div",{}, doelVolgorde.map(di=>{
+      const ti=r.koppel[di];
+      const cls=r.klaar?(ti===di?" goed":" fout"):"";
+      const dv=el("div",{class:"doel"+cls,onclick:()=>{ if(r.klaar) return;
+          if(gekozen!=null) plaats(di,gekozen); else if(ti!=null){ delete r.koppel[di]; bewaar(); teken(); } }},
+        el("span",{class:"vak"+(ti!=null?" vol":"")}, ti!=null?d.paren[ti].l:"…"),
+        el("span",{class:"tekst"}, d.paren[di].r),
+        r.klaar&&ti!==di?el("span",{class:"klein"},"→ "+d.paren[di].l):null);
+      dv.addEventListener("dragover",e=>{ if(!r.klaar){ e.preventDefault(); dv.classList.add("over"); } });
+      dv.addEventListener("dragleave",()=>dv.classList.remove("over"));
+      dv.addEventListener("drop",e=>{ e.preventDefault(); plaats(di, +e.dataTransfer.getData("text/plain")); });
+      return dv;
+    }));
+    box.append(el("div",{class:"koppel"}, tegels, doelen));
+    const compleet=Object.keys(r.koppel).length===d.paren.length;
+    if(r.klaar) box.append(el("div",{class:"fb "+(r.punten===d.paren.length?"goed":"neutraal")},`${r.punten} van de ${d.paren.length} goed. Bij rood staat het juiste antwoord erachter.`));
+    else box.append(el("div",{class:"knoppen"}, el("button",{class:"knop",disabled:!compleet,onclick:()=>{
+      let p=0; for(const k in r.koppel) if(+k===r.koppel[k]) p++; klaar(stap.id,p); toon(); }},"Controleer")));
+  }
+  teken();
+  put(stapinfo(stap), el("h2",{},d.titel), el("div",{class:"opdracht"}, el("p",{},d.vraag), box), r.klaar?volgendeKnop():null);
+}
+
+/* ===================== HERORDENEN (volgorde + ranking) ===================== */
+function sorteerLijst(keys, renderItem, {vast=false, opWijziging, statusVan}={}){
+  const lijst=el("div");
+  let sleepI=null;
+  function teken(){
+    lijst.innerHTML="";
+    keys.forEach((k,i)=>{
+      const rij=el("div",{class:"rij"+(statusVan?(" "+statusVan(k,i)):""),draggable:vast?"false":"true"},
+        el("div",{class:"nr"}, String(i+1)),
+        el("div",{class:"inhoud"}, renderItem(k)),
+        vast?null:el("div",{class:"pijlen"},
+          el("button",{title:"Omhoog","aria-label":"Omhoog",disabled:i===0,onclick:()=>verplaats(i,i-1)},"▲"),
+          el("button",{title:"Omlaag","aria-label":"Omlaag",disabled:i===keys.length-1,onclick:()=>verplaats(i,i+1)},"▼")));
+      if(!vast){
+        rij.addEventListener("dragstart",e=>{ sleepI=i; rij.classList.add("sleep"); e.dataTransfer.effectAllowed="move"; e.dataTransfer.setData("text/plain",String(i)); });
+        rij.addEventListener("dragend",()=>rij.classList.remove("sleep"));
+        rij.addEventListener("dragover",e=>{ e.preventDefault(); rij.classList.add("boven"); });
+        rij.addEventListener("dragleave",()=>rij.classList.remove("boven"));
+        rij.addEventListener("drop",e=>{ e.preventDefault(); if(sleepI!=null&&sleepI!==i) verplaats(sleepI,i); sleepI=null; });
+      }
+      lijst.append(rij);
+    });
+  }
+  function verplaats(van,naar){ const [x]=keys.splice(van,1); keys.splice(naar,0,x); opWijziging&&opWijziging(keys); teken(); }
+  teken(); return lijst;
+}
+function toonOrder(stap){
+  const d=stap.data, r=R(stap.id);
+  if(!r.volgorde){ let v=hussel(d.items.map((_,i)=>i), stap.id); if(v.every((x,i)=>x===i)) v.reverse(); r.volgorde=v; bewaar(); }
+  put(stapinfo(stap), el("h2",{},d.titel), el("div",{class:"opdracht"}, el("p",{},d.vraag),
+    sorteerLijst(r.volgorde, k=>el("span",{},d.items[k]), {vast:r.klaar, opWijziging:()=>bewaar(), statusVan:r.klaar?(k,i)=>k===i?"goed":"fout":null}),
+    r.klaar ? el("div",{class:"fb "+(r.punten===4?"goed":"neutraal")},`${r.punten} van de 4 op de goede plek. Juiste volgorde: 1302 · 14e eeuw · 1464 · 1517.`)
+            : el("div",{class:"knoppen"}, el("button",{class:"knop",onclick:()=>{ const p=r.volgorde.filter((k,i)=>k===i).length; klaar(stap.id,p); toon(); }},"Controleer"))),
+    r.klaar?volgendeKnop():null);
+}
+
+/* ===================== GEBEURTENIS (levenslijn) ===================== */
+function schaalBalk(waarde, band, kleur){
+  const pos=v=>5+(v+5)*9;
+  return el("div",{class:"balk11"},
+    el("div",{class:"nul"}),
+    el("div",{class:"band",style:`left:${pos(band[0])-4.5}%;width:${pos(band[1])-pos(band[0])+9}%`}),
+    el("div",{class:"stip",style:`left:${pos(waarde)}%;background:${kleur}`}));
+}
+function scoreBlok(wie, id, r){
+  const isW=wie==="w";
+  const naam=isW?S.naamW:S.naamJ, ander=isW?S.naamJ:S.naamW, pers=isW?"Witsen":"Jansen";
+  const blok=el("div",{class:"scoren "+wie});
+  let v=0;
+  const waarde=el("div",{class:"waarde"});
+  const zet=()=>{ waarde.innerHTML=`${gezicht(v)} ${teken(v)}<small>${v<=-4?"heel boos":v<0?"ontevreden":v===0?"neutraal":v<4?"tevreden":"heel blij"}</small>`; };
+  const slider=el("input",{type:"range",min:"-5",max:"5",step:"1",value:"0","aria-label":`Score van ${pers}`,oninput:e=>{ v=+e.target.value; zet(); }});
+  zet();
+  blok.append(
+    el("div",{class:"wie"}, `${isW?"🔴":"🔵"} ${naam}, jij bent ${pers}. Hoe reageert hij op deze gebeurtenis?`),
+    el("div",{class:"wegkijk"}, `${ander}, even niet meekijken! 🙈`),
+    el("div",{class:"sliderrij"}, slider, waarde),
+    el("div",{class:"schaal"}, el("span",{},"−5 woedend"), el("span",{},"0 neutraal"), el("span",{},"+5 dolblij")),
+    el("div",{class:"knoppen"}, el("button",{class:"knop "+wie,onclick:()=>{ r[wie]=v; r.fase=isW?"J":"Q"; bewaar(); toon(); }},`🔒 Score van ${pers} vastzetten`)));
+  return blok;
+}
+function toonEvent(stap){
+  const e=EV[EVI[stap.id]], r=R(stap.id);
+  r.fase ||= "W"; r.fout ||= [];
+  put(stapinfo(stap),
+    el("div",{class:"kop-ev"}, el("span",{class:"jaartal"}, e.jaar), el("h2",{}, e.titel)),
+    el("div",{class:"kaart"}, el("p",{style:"margin:0"}, e.tekst)));
+  if(r.fase==="W"){ put(scoreBlok("w",stap.id,r)); }
+  else if(r.fase==="J"){ put(el("span",{class:"slot"},`🔴 Witsen: 🔒 vastgezet`), scoreBlok("j",stap.id,r)); }
+  else {
+    if(r.fase==="Q") put(el("span",{class:"slot"},"🔴 Witsen: 🔒"), el("span",{class:"slot"},"🔵 Jansen: 🔒"));
+    // vraag
+    const opties=hussel(e.opties.map((o,i)=>({...o,i})), stap.id);
+    const opd=el("div",{class:"opdracht"}, el("b",{},"Eerst de verklaring: "), el("span",{}, e.vraag));
+    const box=el("div",{class:"opties"});
+    opties.forEach(o=>{
+      const gekozenFout=r.fout.includes(o.i), isGoed=r.qGoed&&o.goed;
+      const b=el("button",{class:"optie"+(gekozenFout?" fout":"")+(isGoed?" goed":""),disabled:r.qGoed||gekozenFout,onclick:()=>{
+        if(o.goed){ r.qGoed=true; r.qPunten=r.fout.length===0?3:r.fout.length===1?1:0; r.fase="R"; }
+        else r.fout.push(o.i);
+        bewaar(); toon(); }}, o.t);
+      box.append(b);
+      if(gekozenFout) box.append(el("div",{class:"fb fout"},"✗ "+o.fb));
+      if(isGoed) box.append(el("div",{class:"fb goed"},"✓ "+o.fb+` (+${r.qPunten})`));
+    });
+    opd.append(box);
+    put(opd);
+    if(r.fase==="Q") put(hintBlok(stap.id, e.hint));
+  }
+  if(r.fase==="W"||r.fase==="J") put(hintBlok(stap.id, e.hint));
+  if(r.fase==="R"){
+    const wOk=inBand(r.w,e.band.w), jOk=inBand(r.j,e.band.j);
+    if(!r.klaar) klaar(stap.id, (r.qPunten||0)+(wOk?2:0)+(jOk?2:0));
+    if(r.hint) put(el("div",{class:"hint",html:"💡 "+esc(e.hint)}));
+    put(el("h3",{},"Onthulling"),
+      el("div",{class:"onthul"},
+        el("div",{class:"blok w"}, el("b",{class:"kop"},`🔴 ${S.naamW} als Witsen: ${gezicht(r.w)} ${teken(r.w)}`),
+          schaalBalk(r.w,e.band.w,"var(--witsen)"),
+          el("div",{class:"fb "+(wOk?"goed":"fout")}, wOk?"✓ Historisch plausibel (+2)":`✗ Buiten de groene zone (${teken(e.band.w[0])} tot ${teken(e.band.w[1])})`),
+          el("p",{style:"margin:8px 0 0"}, e.uitleg.w)),
+        el("div",{class:"blok j"}, el("b",{class:"kop"},`🔵 ${S.naamJ} als Jansen: ${gezicht(r.j)} ${teken(r.j)}`),
+          schaalBalk(r.j,e.band.j,"var(--jansen)"),
+          el("div",{class:"fb "+(jOk?"goed":"fout")}, jOk?"✓ Historisch plausibel (+2)":`✗ Buiten de groene zone (${teken(e.band.j[0])} tot ${teken(e.band.j[1])})`),
+          el("p",{style:"margin:8px 0 0"}, e.uitleg.j))),
+      Math.abs(r.w-r.j)>=5 ? el("div",{class:"verschil"},`⚡ ${Math.abs(r.w-r.j)} punten verschil tussen jullie personages! Zeg hardop in één zin tegen elkaar wáárom hun belangen hier zo botsen.`) :
+      Math.abs(r.w-r.j)<=1 ? el("div",{class:"verschil"},"🤝 Jullie personages zitten hier dicht bij elkaar. Wat hebben patriciër en gemeen hier gemeenschappelijk?") : null,
+      volgendeKnop());
+  }
+}
+
+/* ===================== LEVEL-EINDE ===================== */
+function toonEnd(stap){
+  const lv=LEVELS[stap.lv];
+  if(!R(stap.id).klaar) klaar(stap.id,0);
+  const punten=STAPPEN.filter(s=>s.lv===stap.lv).reduce((t,s)=>t+(S.res[s.id]?.punten||0)-(S.res[s.id]?.hint?1:0),0);
+  const max=STAPPEN.filter(s=>s.lv===stap.lv).reduce((t,s)=>t+s.max,0);
+  const lijst=el("div");
+  put(
+    el("h2",{style:"text-align:center"},`Level ${stap.lv+1} voltooid!`),
+    el("div",{class:"beloning"}, el("div",{class:"icoon"},lv.icoon), el("div",{class:"naam"},"Privilege verdiend: "+lv.privilege),
+      el("div",{class:"klein"},`Dit level: ${Math.max(0,punten)} van ${max} punten`)),
+    stap.lv!==3 ? el("div",{}, el("h3",{},"Jullie levenslijn tot nu toe"), grafiekSVG({tot:stap.lv}), legenda()) : null,
+    el("h3",{},`🏆 Ranglijst ${klasLabel(S.klas)}`), lijst,
+    volgendeKnop(stap.lv===4?"Naar de finale":"Volgend level"));
+  startPoll(S.klas, lijst, {interval:8000});
+}
+
+/* ===================== GRAFIEK ===================== */
+function legenda(banden=false){
+  return el("div",{class:"legenda"},
+    el("span",{}, el("i",{style:"background:var(--witsen)"}), `Witsen (${S.naamW})`),
+    el("span",{}, el("i",{style:"background:var(--jansen)"}), `Jansen (${S.naamJ})`),
+    banden?el("span",{}, el("i",{style:"background:rgba(46,107,52,.25);border-radius:2px"}),"historisch plausibele zone"):null);
+}
+function grafiekSVG({tot=5, banden=false}={}){
+  const W=860,H=320,L=40,Rm=12,T=16,B=58;
+  const n=EV.length, x=i=>L+(i+.5)*(W-L-Rm)/n, y=v=>T+(5-v)/10*(H-T-B);
+  let s=`<svg class="grafiek" viewBox="0 0 ${W} ${H}" role="img" aria-label="Levenslijn van Witsen en Jansen">`;
+  for(let v=-5;v<=5;v++) s+=`<line x1="${L}" x2="${W-Rm}" y1="${y(v)}" y2="${y(v)}" stroke="${v===0?"#555":"#e6dcc6"}" stroke-width="${v===0?1.5:1}"/><text x="${L-8}" y="${y(v)+4}" font-size="11" text-anchor="end" fill="#6b5e4a" font-family="Source Sans 3,sans-serif">${v>0?"+"+v:v}</text>`;
+  EV.forEach((e,i)=>{
+    const stap=STAPPEN.find(st=>st.id===e.id);
+    AS[e.id].forEach((t,r)=>{ s+=`<text x="${x(i)}" y="${H-B+16+r*13}" font-size="${r?11:12.5}" font-weight="${r?400:700}" text-anchor="middle" fill="${r?"#5b4f40":"#2a2117"}" font-family="Source Sans 3,sans-serif">${esc(t)}</text>`; });
+    if(banden){
+      const bw=(W-L-Rm)/n*.32;
+      s+=`<rect x="${x(i)-bw-2}" y="${y(e.band.w[1])}" width="${bw}" height="${y(e.band.w[0])-y(e.band.w[1])}" fill="rgba(164,22,26,.13)"/>`;
+      s+=`<rect x="${x(i)+2}" y="${y(e.band.j[1])}" width="${bw}" height="${y(e.band.j[0])-y(e.band.j[1])}" fill="rgba(29,78,137,.13)"/>`;
+    }
+    if(stap.lv>tot) s+=`<line x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${H-B}" stroke="#f0e9da" stroke-dasharray="3 4"/>`;
+  });
+  for(const [wie,kleur] of [["w","#a4161a"],["j","#1d4e89"]]){
+    const pts=EV.map((e,i)=>{ const r=S.res[e.id]; return r&&r.fase==="R"?[x(i),y(r[wie])]:null; }).filter(Boolean);
+    if(pts.length>1) s+=`<polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none" stroke="${kleur}" stroke-width="3" stroke-linejoin="round"/>`;
+    pts.forEach(p=>s+=`<circle cx="${p[0]}" cy="${p[1]}" r="5.5" fill="${kleur}" stroke="#fff" stroke-width="1.5"/>`);
+  }
+  s+="</svg>";
+  return el("div",{html:s});
+}
+
+/* ===================== RANKING THE CITIES ===================== */
+function toonRank(stap){
+  const d=stap.data, r=R(stap.id);
+  if(!r.volgorde){ r.volgorde=hussel(d.steden.map((_,i)=>i), stap.id); bewaar(); }
+  const intro = stap.id==="r1"
+    ? el("div",{}, el("p",{html:"Witsen schrijft een stadskroniek en wil weten: <b>welke steden waren het meest zelfstandig?</b> Rangschik de vijf steden van <b>meest</b> (1) naar <b>minst</b> (5) passend bij kenmerkend aspect 4b: <i>de opkomst van de stedelijke burgerij en de toenemende zelfstandigheid van steden</i>."}),
+        el("p",{class:"klein"},"Let op: rijk of groot is niet hetzelfde als zelfstandig. Kijk naar wie het bestuur, de rechtspraak en de belastingen in handen heeft."))
+    : el("p",{html:"Nu dezelfde vraag voor de periode <b>vanaf ca. 1500</b>. Let op de nieuwe stad in het rijtje, en vergelijk straks met je vorige ranking."});
+  put(stapinfo(stap), el("h2",{},d.titel), intro,
+    el("div",{class:"opdracht"},
+      sorteerLijst(r.volgorde, k=>{ const c=d.steden[k];
+        return el("div",{class:"stad"}, el("b",{},c.s), el("span",{class:"tag "+c.r}, c.r==="zuid"?"ZUID":"NOORD"),
+          el("ul",{}, c.feiten.map(f=>el("li",{},f))),
+          r.klaar?el("div",{class:"fb "+(inBand(r.volgorde.indexOf(k)+1,c.band)?"goed":"fout")}, (inBand(r.volgorde.indexOf(k)+1,c.band)?"✓ ":`✗ Beter op plaats ${c.band[0]===c.band[1]?c.band[0]:c.band[0]+"–"+c.band[1]}. `)+c.fb):null); },
+        {vast:r.klaar, opWijziging:()=>bewaar(), statusVan:r.klaar?(k,i)=>inBand(i+1,d.steden[k].band)?"goed":"fout":null}),
+      r.klaar ? el("div",{class:"fb "+(r.punten===5?"goed":"neutraal")},`${r.punten} van de 5 steden op een verdedigbare plek.`)
+              : el("div",{class:"knoppen"}, el("button",{class:"knop",onclick:()=>{
+                  const p=r.volgorde.filter((k,i)=>inBand(i+1,d.steden[k].band)).length; klaar(stap.id,p); toon(); }},"Ranking vastleggen"))),
+    r.klaar?volgendeKnop():null);
+}
+
+/* ===================== SCHRIJFOPDRACHT ===================== */
+function toonWrite(stap){
+  const d=stap.data, r=R(stap.id);
+  r.tekst ??= ""; r.vinkjes ||= d.criteria.map(()=>false);
+  const extra = stap.id==="s1" && S.res.r1?.klaar && S.res.r2?.klaar
+    ? el("div",{class:"kaart klein"}, el("b",{},"Jullie rankings: "),
+        `tot 1500: ${S.res.r1.volgorde.map(k=>STEDEN[0].steden[k].s).join(" › ")}  ·  vanaf 1500: ${S.res.r2.volgorde.map(k=>STEDEN[1].steden[k].s).join(" › ")}`)
+    : null;
+  const ta=el("textarea",{placeholder:"Schrijf hier jullie antwoord…",disabled:r.ingeleverd,oninput:e=>{ r.tekst=e.target.value; bewaar(); knop.disabled=r.tekst.trim().length<40; }});
+  ta.value=r.tekst;
+  const knop=el("button",{class:"knop",disabled:r.tekst.trim().length<40,onclick:()=>{ r.ingeleverd=true; bewaar(); toon(); }},"Inleveren en modelantwoord bekijken");
+  put(stapinfo(stap), el("h2",{},d.titel), extra,
+    el("div",{class:"opdracht"}, el("p",{html:d.vraag}), ta,
+      r.ingeleverd?null:el("div",{class:"knoppen"}, knop, el("span",{class:"klein"},"Minstens een paar zinnen; het modelantwoord verschijnt pas daarna."))));
+  if(r.ingeleverd){
+    put(el("h3",{},"Modelantwoord"), el("div",{class:"model"}, d.model),
+      el("h3",{},"Kijk jullie eigen antwoord na: vink aan wat erin staat (2 punten per criterium)"),
+      el("div",{}, d.criteria.map((c,i)=>el("label",{class:"criterium"},
+        el("input",{type:"checkbox",checked:r.vinkjes[i],disabled:r.klaar,onchange:e=>{ r.vinkjes[i]=e.target.checked; bewaar(); }}), el("span",{},c)))),
+      r.klaar ? el("div",{class:"fb goed"},`Nagekeken: ${r.punten} van de 6 punten.`) :
+        el("div",{class:"knoppen"}, el("button",{class:"knop",onclick:()=>{ klaar(stap.id, r.vinkjes.filter(Boolean).length*2); toon(); }},"Nakijken klaar")),
+      r.klaar?volgendeKnop():null);
+  }
+}
+
+/* ===================== FINALE: GRAFIEK ===================== */
+function toonGraph(stap){
+  const r=R(stap.id); r.antw ||= {};
+  put(stapinfo(stap), el("h2",{},"De levenslijn compleet"),
+    el("p",{},"Hier zijn de twee levenslijnen die jullie hebben getekend. De gekleurde balkjes laten de historisch plausibele zone per personage zien."),
+    grafiekSVG({tot:5, banden:true}), legenda(true));
+  GRAFIEKVRAGEN.forEach(q=>{
+    const a=r.antw[q.id];
+    put(el("div",{class:"opdracht"}, el("b",{},q.vraag),
+      el("div",{class:"jaarknoppen"}, EV.map(e=>el("button",{
+        class: a? (e.id===a.keuze?(a.goed?"goed":"fout"):(a&&!a.goed&&q.goed.includes(e.id)?"goed":"")) : "",
+        disabled:!!a, onclick:()=>{ r.antw[q.id]={keuze:e.id, goed:q.goed.includes(e.id)}; bewaar();
+          if(GRAFIEKVRAGEN.every(g=>r.antw[g.id])) klaar(stap.id, GRAFIEKVRAGEN.filter(g=>r.antw[g.id].goed).length*2);
+          toon(); }}, `${e.jaar} ${e.kort}`))),
+      a ? el("div",{class:"fb "+(a.goed?"goed":"fout")}, (a.goed?"✓ (+2) ":"✗ ")+q.uitleg) : null));
+  });
+  if(r.klaar) put(volgendeKnop());
+}
+
+/* ===================== FINALE: KENMERKENDE ASPECTEN ===================== */
+function toonKA(stap){
+  const r=R(stap.id); r.keuze ||= {};
+  const rijen=KA.map(k=>{
+    const sel=el("select",{disabled:r.klaar,onchange:e=>{ r.keuze[k.code]=e.target.value; bewaar(); knop.disabled=KA.some(x=>!r.keuze[x.code]); }},
+      el("option",{value:""},"— kies een gebeurtenis —"), EV.map(e=>el("option",{value:e.id,selected:r.keuze[k.code]===e.id},`${e.jaar} · ${e.kort}`)));
+    const ok=r.klaar && k.goed.includes(r.keuze[k.code]);
+    return el("div",{class:"karij"+(r.klaar?(ok?" goed":" fout"):"")},
+      el("div",{}, el("span",{class:"kacode"},k.code), k.t,
+        r.klaar&&!ok?el("div",{class:"fb fout"},"Bijvoorbeeld: "+k.goed.map(id=>EV[EVI[id]].jaar+" "+EV[EVI[id]].kort).join(" of ")):null),
+      sel);
+  });
+  const knop=el("button",{class:"knop",disabled:KA.some(x=>!r.keuze[x.code]),onclick:()=>{
+    klaar(stap.id, KA.filter(k=>k.goed.includes(r.keuze[k.code])).length); toon(); }},"Controleer");
+  put(stapinfo(stap), el("h2",{},"Kenmerkende aspecten koppelen"),
+    el("p",{},"Op het examen moet je gebeurtenissen kunnen koppelen aan kenmerkende aspecten. Kies bij elk aspect een gebeurtenis uit jullie levenslijn die er goed bij past. Een gebeurtenis mag vaker gebruikt worden."),
+    el("div",{}, rijen),
+    r.klaar ? el("div",{class:"fb "+(r.punten===KA.length?"goed":"neutraal")},`${r.punten} van de ${KA.length} goed.`) : el("div",{class:"knoppen"}, knop),
+    r.klaar?volgendeKnop():null);
+}
+
+/* ===================== OVERZICHT ===================== */
+function toonOverzicht(stap){
+  if(!S.eind){ S.eind=Date.now(); bewaar(); sync(); }
+  const min=Math.round((S.eind-S.start)/60000);
+  const lijst=el("div");
+  const schrijf=["s1","s2","s3"].map(id=>{ const d=SCHRIJF[id], r=S.res[id]||{};
+    return el("div",{style:"margin-bottom:14px"}, el("b",{},d.titel+` (${r.punten||0}/6)`),
+      el("p",{style:"white-space:pre-wrap;margin:4px 0;background:#fff;border:1px solid var(--lijn);border-radius:4px;padding:8px 10px"}, r.tekst||"—"),
+      el("ul",{class:"klein",style:"margin:0"}, d.criteria.map((c,i)=>el("li",{},(r.vinkjes&&r.vinkjes[i]?"✓ ":"✗ ")+c)))); });
+  put(
+    el("h1",{},"De stadskroniek is af"),
+    el("p",{class:"ondertitel"},`${namen()} · ${klasLabel(S.klas)} · ${new Date(S.eind).toLocaleDateString("nl-NL")}`),
+    el("div",{class:"beloning"}, el("div",{class:"icoon"}, LEVELS.filter((_,i)=>levelKlaar(i)).map(l=>l.icoon).join(" ")),
+      el("div",{class:"naam"},`${score()} van ${teHalen()} punten · max. ${MAX_TOTAAL}`),
+      el("div",{class:"klein"},`Tijd: ${min} minuten${min>TIJD_MIN?" (over de tijd)":""}`)),
+    el("h3",{},"Jullie levenslijn"), grafiekSVG({tot:5, banden:true}), legenda(true),
+    el("h3",{},"Ranking the Cities"),
+    el("p",{class:"klein"}, S.res.r1?.volgorde?`Tot ca. 1500: ${S.res.r1.volgorde.map(k=>STEDEN[0].steden[k].s).join(" › ")}`:""),
+    el("p",{class:"klein"}, S.res.r2?.volgorde?`Vanaf ca. 1500: ${S.res.r2.volgorde.map(k=>STEDEN[1].steden[k].s).join(" › ")}`:""),
+    el("h3",{},"Schrijfopdrachten"), schrijf,
+    el("h3",{},"Wat je moet kunnen voor het examen"),
+    el("ul",{style:"font-size:17px"},
+      el("li",{},"Jaartallen: 1302 Guldensporenslag · 1585 val van Antwerpen · 1602 VOC · 1648 Vrede van Münster · 1672 Rampjaar."),
+      el("li",{},"Begrippen: stadsrechten, poorter, patriciër, gemeen, Hanze, koopmansbeurs, bonum commune, moderne devotie, particularisme, centralisatie, stapelmarkt, oorlogseconomie, regenten, gewetensvrijheid, mercantilisme, oligarchisering, staatsgezind, Oranjegezind."),
+      el("li",{},"Kenmerkende aspecten 4a, 4b, 4e, 5d, 5e, 6a, 6b en 6c koppelen aan concrete gebeurtenissen in de Lage Landen.")),
+    el("div",{class:"geen-print"}, el("h3",{},`🏆 Ranglijst ${klasLabel(S.klas)}`), lijst),
+    el("div",{class:"knoppen geen-print"}, el("button",{class:"knop oker",onclick:()=>window.print()},"🖨️ Opslaan als PDF / printen")));
+  startPoll(S.klas, lijst, {interval:8000});
+}
+
+/* ===================== DOCENTSCHERM ===================== */
+function toonBord(){
+  document.getElementById("balk").hidden=true; document.getElementById("nav").hidden=true;
+  const params=new URLSearchParams(location.search);
+  let klas=(params.get("bord")||"").toUpperCase(); if(!KLASSEN.includes(klas)) klas=KLASSEN[0];
+  const lijst=el("div"), status=el("p",{class:"klein"});
+  const code=el("input",{type:"password",placeholder:"Docentcode",autocomplete:"off",style:"padding:8px 10px;border:1px solid #a99a7c;border-radius:5px;width:150px"});
+  vel.style.maxWidth="none";
+  put(el("h1",{},"🏆 Ranglijst"),
+    el("p",{class:"ondertitel"},"Twee levens, één stad · HC Steden en burgers in de Lage Landen"),
+    el("div",{class:"tabs"}, KLASSEN.map(k=>el("a",{href:"?bord="+k,class:"knop "+(k===klas?"oker":"licht"),style:"text-decoration:none"},klasLabel(k)))),
+    lijst,
+    el("p",{class:"klein",style:"margin-top:14px"},`Ververst elke 5 seconden. Toont tweetallen die na de laatste reset (en in de afgelopen ${RANGLIJST_UREN} uur) zijn begonnen.`),
+    el("details",{class:"ui",style:"margin-top:18px"}, el("summary",{style:"cursor:pointer;font-weight:600"},"Nieuwe les: ranglijst van "+klasLabel(klas)+" leegmaken"),
+      el("div",{class:"knoppen"}, code, el("button",{class:"knop",onclick:async()=>{
+        status.textContent="Bezig…";
+        try{ const ok=await sb("rpc/levenslijn_reset",{method:"POST",body:JSON.stringify({p_klas:klas,p_code:code.value})});
+          status.textContent= ok===true ? `✓ Ranglijst van ${klasLabel(klas)} is leeggemaakt. Alleen tweetallen die nu beginnen verschijnen.` : "✗ Onjuiste docentcode.";
+          code.value=""; startPoll(klas, lijst, {groot:true, interval:5000});
+        }catch(e){ status.textContent="Reset lukte niet: geen verbinding."; } }},"Leegmaken")), status),
+    el("p",{class:"klein",style:"margin-top:14px"}, el("a",{href:"./"},"← naar de opdracht")));
+  startPoll(klas, lijst, {groot:true, interval:5000});
+}
+
+/* ===================== OPSTARTEN ===================== */
+document.getElementById("opnieuw").addEventListener("click",()=>{
+  if(confirm("Weet je het zeker? Al jullie antwoorden en punten worden gewist.")){ localStorage.removeItem(SLEUTEL); S=nieuweStaat(); vorigeScore=null; toon(); }
+});
+if(new URLSearchParams(location.search).has("bord")) toonBord();
+else { toon(); if(S.stap>=0) sync(); }
+</script>
+</body>
+</html>
